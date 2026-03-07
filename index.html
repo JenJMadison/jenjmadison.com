@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jen J Madison – Costume Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #e8e4e0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ───────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: padding 0.3s;
+    }
+    .nav.scrolled { padding: 0.6rem 2.5rem; }
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .nav-brand span {
+      font-weight: 400; color: #b8a99a;
+      font-size: 0.8rem; margin-left: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.15em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.12em; font-weight: 500;
+      color: #b8a99a; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-toggle { display: none; background: none; border: none; color: #b8a99a; cursor: pointer; font-size: 1.5rem; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: block; }
+      .nav-links {
+        position: fixed; top: 0; right: 0; bottom: 0;
+        flex-direction: column; justify-content: center; align-items: center;
+        background: rgba(10,10,10,0.97); width: 100%; gap: 2.5rem;
+        transform: translateX(100%); transition: transform 0.3s;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a { font-size: 1.1rem; }
+      .nav-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; color: #b8a99a; font-size: 2rem; cursor: pointer; display: block; }
+    }
+    @media (min-width: 769px) { .nav-close { display: none; } }
+
+    /* ── Hero ──────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(184,169,154,0.08) 0%, transparent 70%);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero .subtitle {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      text-transform: uppercase; letter-spacing: 0.25em;
+      color: #b8a99a; margin-bottom: 2rem;
+    }
+    .hero .tagline {
+      max-width: 500px; font-size: 1rem; color: #999;
+      font-weight: 300; line-height: 1.7;
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 2rem;
+      animation: bob 2s ease-in-out infinite; color: #555; font-size: 1.5rem;
+    }
+    @keyframes bob { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(8px); } }
+
+    /* ── Section Common ───────────────────────────────── */
+    section { padding: 6rem 2rem; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem;
+    }
+    .section-header .rule { width: 60px; height: 2px; background: #b8a99a; margin: 1rem auto 0; }
+
+    /* ── Portfolio ─────────────────────────────────────── */
+    #portfolio { max-width: 1400px; margin: 0 auto; }
+    .filter-bar {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      background: transparent; border: 1px solid rgba(184,169,154,0.3);
+      color: #b8a99a; padding: 0.45rem 1.1rem; font-size: 0.75rem;
+      text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;
+      border-radius: 2px; transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .filter-btn:hover { border-color: #b8a99a; color: #fff; }
+    .filter-btn.active { background: #b8a99a; color: #0a0a0a; border-color: #b8a99a; }
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem;
+    }
+    .show-card {
+      position: relative; overflow: hidden; border-radius: 3px;
+      cursor: pointer; aspect-ratio: 3/2; background: #1a1a1a;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .show-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+    .show-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .show-card:hover img { transform: scale(1.05); }
+    .show-card .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 40%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.25rem; transition: opacity 0.3s;
+    }
+    .show-card .overlay h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.2rem;
+    }
+    .show-card .overlay .company {
+      font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #b8a99a;
+    }
+    .show-card .overlay .count {
+      font-size: 0.65rem; color: #777; margin-top: 0.3rem;
+    }
+
+    /* ── Lightbox ──────────────────────────────────────── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.96); padding: 2rem; overflow-y: auto;
+    }
+    .lightbox.open { display: block; }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 2rem;
+      background: none; border: none; color: #fff;
+      font-size: 2rem; cursor: pointer; z-index: 210;
+    }
+    .lightbox-content { max-width: 1000px; margin: 3rem auto; text-align: center; }
+    .lightbox-content h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+    .lightbox-content .company-tag {
+      font-size: 0.8rem; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #b8a99a; margin-bottom: 2rem;
+    }
+    .lightbox-gallery {
+      display: grid; grid-template-columns: 1fr; gap: 0.75rem;
+    }
+    .lightbox-gallery img {
+      width: 100%; border-radius: 2px;
+      background: #111;
+    }
+    /* Two-column for landscape-heavy galleries */
+    @media (min-width: 700px) {
+      .lightbox-gallery.multi { grid-template-columns: 1fr 1fr; }
+      .lightbox-gallery.multi img.wide { grid-column: 1 / -1; }
+    }
+
+    /* ── CV Section ────────────────────────────────────── */
+    #cv { max-width: 900px; margin: 0 auto; }
+    .cv-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    .cv-company { border-left: 2px solid #b8a99a; padding-left: 1.5rem; }
+    .cv-company h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.6rem; }
+    .cv-company ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0; }
+    .cv-company li { font-size: 0.9rem; color: #aaa; font-weight: 300; font-style: italic; }
+    .cv-company li:not(:last-child)::after { content: ",\00a0"; }
+    .cv-education {
+      margin-top: 2rem; padding: 1.5rem;
+      background: rgba(184,169,154,0.06); border-radius: 4px;
+    }
+    .cv-education h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.4rem; }
+    .cv-education p { color: #aaa; font-size: 0.9rem; }
+
+    /* ── Press ─────────────────────────────────────────── */
+    #press { max-width: 900px; margin: 0 auto; }
+    .press-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 700px) { .press-grid { grid-template-columns: 1fr 1fr; } }
+    .press-quote {
+      position: relative;
+      padding: 1.75rem 1.75rem 1.75rem 2.25rem;
+      border-left: 3px solid #b8a99a;
+      background: rgba(184,169,154,0.04);
+      border-radius: 0 4px 4px 0;
+      transition: background 0.2s;
+    }
+    .press-quote:hover { background: rgba(184,169,154,0.08); }
+    .press-quote::before {
+      content: "\201C";
+      position: absolute; top: 0.5rem; left: 0.6rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; color: rgba(184,169,154,0.25); line-height: 1;
+    }
+    .press-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-style: italic;
+      line-height: 1.6; color: #e0dcd8;
+      margin-bottom: 0.75rem;
+    }
+    .press-quote .press-show {
+      font-size: 0.8rem; font-weight: 500;
+      color: #b8a99a; text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 0.3rem;
+    }
+    .press-quote .press-source {
+      font-size: 0.75rem; color: #777;
+    }
+    .press-quote .press-source a {
+      color: #999; border-bottom: 1px solid rgba(153,153,153,0.3);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .press-quote .press-source a:hover { color: #fff; border-color: #fff; }
+    .press-photos {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 600px) { .press-photos { grid-template-columns: 1fr; } }
+    .press-feature {
+      border-radius: 4px; overflow: hidden;
+    }
+    .press-feature img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      border-radius: 4px; opacity: 0.85;
+    }
+    .press-feature figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.7rem; color: #777; font-style: italic;
+      text-align: center;
+    }
+
+    /* ── Contact ───────────────────────────────────────── */
+    #contact { max-width: 600px; margin: 0 auto; text-align: center; }
+    #contact p { color: #999; font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: #b8a99a; border-bottom: 1px solid rgba(184,169,154,0.3);
+      padding-bottom: 0.2rem; transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: #fff; border-color: #fff; }
+
+    /* ── Footer ────────────────────────────────────────── */
+    footer {
+      text-align: center; padding: 3rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.75rem; color: #555;
+    }
+
+    /* ── Responsive ────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+      section { padding: 4rem 1.25rem; }
+      .show-card .overlay h3 { font-size: 0.85rem; }
+      .show-card .overlay .company { font-size: 0.6rem; }
+      .show-card .overlay .count { display: none; }
+    }
+
+    /* ── Loading fade-in ──────────────────────────────── */
+    .show-card img { opacity: 0; transition: opacity 0.4s, transform 0.4s; }
+    .show-card img.loaded { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ──────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">Jen J Madison <span>Costume Design</span></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <button class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#press">Press</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <h1>Jen J Madison</h1>
+    <p class="subtitle">Costume Designer</p>
+    <p class="tagline"></p>
+    <div class="scroll-indicator">&#8595;</div>
+  </section>
+
+  <!-- ── Portfolio ───────────────────────────────────── -->
+  <section id="portfolio">
+    <div class="section-header">
+      <h2>Portfolio</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="opera-orlando">Opera Orlando</button>
+      <button class="filter-btn" data-filter="shakespeare-dallas">Shakespeare Dallas</button>
+      <button class="filter-btn" data-filter="kitchen-dog">Kitchen Dog Theater</button>
+      <button class="filter-btn" data-filter="pegasus">Pegasus Theatre</button>
+      <button class="filter-btn" data-filter="austin-shakespeare">Austin Shakespeare</button>
+      <button class="filter-btn" data-filter="ut-austin">UT Austin</button>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </section>
+
+  <!-- ── CV ──────────────────────────────────────────── -->
+  <section id="cv">
+    <div class="section-header">
+      <h2>Selected Work</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="cv-grid">
+      <div class="cv-company">
+        <h3>Opera Orlando</h3>
+        <ul><li>La Boh&egrave;me</li><li>Beatrice + Benedict</li><li>Cavalleria Rusticana</li><li>Cendrillon</li><li>MacBeth</li><li>Lucia di Lammermoor</li><li>Tosca</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Shakespeare Dallas</h3>
+        <ul><li>The Taming of the Shrew</li><li>Comedy of Errors</li><li>Titus Andronicus</li><li>The Tempest</li><li>Richard III</li><li>She Stoops to Conquer</li><li>King Lear</li><li>Much Ado About Nothing</li><li>Tartuffe</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Kitchen Dog Theater</h3>
+        <ul><li>Br&rsquo;er Cotton</li><li>A Stain on the Silence</li><li>The Dumb Waiter</li><li>The Motherf**ker with the Hat</li><li>Detroit</li><li>Se Llama Cristina</li><li>Beauty Queen of Leenane</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Pegasus Theatre</h3>
+        <ul><li>Death on Delivery</li><li>It&rsquo;s Beginning to Look a Lot Like Murder</li><li>Death is a Bad Habit</li><li>Rehearsal for Murder</li><li>XSR: DIE!</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Austin Shakespeare</h3>
+        <ul><li>Love&rsquo;s Labour&rsquo;s Lost</li><li>Man and Superman</li><li>Anthem</li><li>The Tempest</li><li>A Midsummer Night&rsquo;s Dream</li><li>Mary Stuart</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Actor&rsquo;s Express</h3>
+        <ul><li>A Prayer for the French Republic</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Mary Moody Northen Theatre</h3>
+        <ul><li>A Lie of the Mind</li><li>Who&rsquo;s Afraid of Virginia Woolf</li><li>City of Angels</li></ul>
+      </div>
+      <div class="cv-company">
+        <h3>Zilker Theatre Productions</h3>
+        <ul><li>Annie</li></ul>
+      </div>
+    </div>
+    <div class="cv-education">
+      <h3>Education</h3>
+      <p>MFA Theatrical Design &mdash; The University of Texas at Austin</p>
+      <p style="margin-top:1rem;"><a href="cv.html" style="color:#b8a99a; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; border-bottom:1px solid rgba(184,169,154,0.3); padding-bottom:2px;">View Full CV &rarr;</a></p>
+    </div>
+  </section>
+
+  <!-- ── Press ───────────────────────────────────────── -->
+  <section id="press">
+    <div class="section-header">
+      <h2>Press</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="press-photos">
+      <figure class="press-feature">
+        <img src="lac_sethkubersky_img_0217.webp" alt="Behind the scenes in the costume shop for Opera Orlando's Tosca">
+        <figcaption>In the costume shop for Tosca &mdash; Orlando Weekly</figcaption>
+      </figure>
+      <figure class="press-feature">
+        <img src="img-7432.jpg" alt="Jen Madison with period costume and armor at Opera Orlando">
+        <figcaption>Jen Madison &mdash; Orlando Magazine, Sep 2025</figcaption>
+      </figure>
+    </div>
+    <div class="press-grid">
+      <a class="press-quote" href="https://www.orlandosentinel.com/2025/02/08/cendrillon-review-opera-orlando-cinderella/" target="_blank" rel="noopener">
+        <div class="press-show">Cendrillon &middot; Opera Orlando</div>
+        <blockquote>Costumes have a knack for detail.</blockquote>
+        <div class="press-source">Matthew J. Palm &mdash; Orlando Sentinel, Feb 2025</div>
+      </a>
+      <a class="press-quote" href="https://www.orlandosentinel.com/2024/04/20/lucia-di-lammermoor-game-of-thrones-opera-review/" target="_blank" rel="noopener">
+        <div class="press-show">Lucia di Lammermoor &middot; Opera Orlando</div>
+        <blockquote>Succeeds on every level. It&rsquo;s beautiful to look at.</blockquote>
+        <div class="press-source">Matthew J. Palm &mdash; Orlando Sentinel, Apr 2024</div>
+      </a>
+      <a class="press-quote" href="https://www.orlandoweekly.com/arts/opera-orlandos-tosca-takes-shape-with-plenty-of-midnight-oil-burned-before-the-final-reveal-this-weekend-35356790" target="_blank" rel="noopener">
+        <div class="press-show">Tosca &middot; Opera Orlando</div>
+        <blockquote>Combining rented pieces with new builds to create the 70-odd looks required.</blockquote>
+        <div class="press-source">Orlando Weekly, Oct 2023</div>
+      </a>
+      <a class="press-quote" href="https://www.orlandomagazine.com/peek-behind-the-curtain-at-orlandos-art-scene-jean-madison/" target="_blank" rel="noopener">
+        <div class="press-show">Lucia di Lammermoor &middot; Opera Orlando</div>
+        <blockquote>We spent almost a week just distressing and painting to get them looking like they had been worn on the edge of civilization for years.</blockquote>
+        <div class="press-source">Jennifer McKee &mdash; Orlando Magazine, Sep 2025</div>
+      </a>
+      <a class="press-quote" href="https://www.dallasobserver.com/arts-culture/xsr-die-pegasus-theatres-latest-whipsmart-comedy-in-black-and-white-6428534/" target="_blank" rel="noopener">
+        <div class="press-show">XSR: Die! &middot; Pegasus Theatre</div>
+        <blockquote>Costumes stay successfully within the limits of the black-and-white template, dressing Margo in some especially dramatic and glamorous silks and velvets.</blockquote>
+        <div class="press-source">Elaine Liner &mdash; Dallas Observer, Jan 2013</div>
+      </a>
+      <a class="press-quote" href="https://www.dallasobserver.com/arts/with-rehearsal-for-murder-pegasus-theatre-revives-doa-play-with-killer-design-6431561" target="_blank" rel="noopener">
+        <div class="press-show">Rehearsal for Murder! &middot; Pegasus Theatre</div>
+        <blockquote>Period-appropriate 1940s tweed suits, argyle sweaters and pencil skirts, in what appear to be more than 50 shades of gray.</blockquote>
+        <div class="press-source">Elaine Liner &mdash; Dallas Observer, Jan 2014</div>
+      </a>
+      <a class="press-quote" href="https://www.austinchronicle.com/arts/arts-review-11748666/" target="_blank" rel="noopener">
+        <div class="press-show">Annie &middot; Zilker Theatre Productions</div>
+        <blockquote>Jen J. Madison&rsquo;s costumes do, though. The orphans put the &lsquo;rag&rsquo; in &lsquo;ragamuffin.&rsquo;</blockquote>
+        <div class="press-source">Austin Chronicle, Jul 2010</div>
+      </a>
+      <a class="press-quote" href="https://ctxlivetheatre.com/reviews/review-loves-labors-lost-by-austin-shakespeare/" target="_blank" rel="noopener">
+        <div class="press-show">Love&rsquo;s Labour&rsquo;s Lost &middot; Austin Shakespeare</div>
+        <blockquote>Costumes are eye-catching and comic in themselves, from the Jackie K outfits to the 60&rsquo;s bathing suits to the gaudy beach shirts of the surfer guys.</blockquote>
+        <div class="press-source">Michael Meigs &mdash; CTX Live Theatre</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Contact ─────────────────────────────────────── -->
+  <section id="contact">
+    <div class="section-header">
+      <h2>Get In Touch</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:jenjmadison@me.com">&#9993; Email</a>
+      <a class="contact-link" href="https://www.linkedin.com/in/jen-j-madison-50338211/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>&copy; 2026 Jen J Madison. All rights reserved.</footer>
+
+  <!-- ── Lightbox ────────────────────────────────────── -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+  </div>
+
+  <script>
+    // ── Show data with real image paths ─────────────────
+    const shows = [
+      {
+        title: "Lucia di Lammermoor", company: "Opera Orlando", filter: "opera-orlando",
+        slug: "lucia-di-lammermoor",
+        thumb: "images/lucia-di-lammermoor/LuciaDiLammermoor_OperaOrlando_PRODUCTION_PhotoAshleighAnnGardner-161-1024x683.jpg",
+        images: [
+          "LuciaDiLammermoor_OperaOrlando_PRODUCTION_PhotoAshleighAnnGardner-37-scaled.jpg",
+          "LuciaDiLammermoor_OperaOrlando_PRODUCTION_PhotoAshleighAnnGardner-60-scaled.jpg",
+          "LuciaDiLammermoor_OperaOrlando_PRODUCTION_PhotoAshleighAnnGardner-161-scaled.jpg",
+          "LuciaDiLammermoor_OperaOrlando_PRODUCTION_PhotoAshleighAnnGardner-32-scaled.jpg",
+          "DSC02960-scaled.jpg",
+          "DSC03023-scaled.jpg",
+          "DSC03278-scaled.jpg",
+          "DSC03307-scaled.jpg",
+          "DSC03329-scaled.jpg",
+          "DSC03391-scaled.jpg",
+          "DSC03412-scaled.jpg",
+          "DSC03521-scaled.jpg",
+          "Lucia-Cards.jpeg",
+          "Enrico-Card.jpeg",
+          "Edgardo-Card.jpeg",
+          "Raimondo-Card.jpeg",
+        ]
+      },
+      {
+        title: "Tosca", company: "Opera Orlando", filter: "opera-orlando",
+        slug: "tosca",
+        thumb: "images/tosca/IMG_0196-1024x682.jpg",
+        images: [
+          "IMG_0194-scaled.jpg","IMG_0196-scaled.jpg","IMG_0200-scaled.jpg",
+          "IMG_0203-scaled.jpg","IMG_0205-scaled.jpg","IMG_0208-scaled.jpg",
+          "IMG_0212-scaled.jpg","IMG_0215-1-scaled.jpg","IMG_0218-scaled.jpg",
+          "IMG_0220-scaled.jpg","IMG_0221-1-scaled.jpg",
+        ]
+      },
+      {
+        title: "The Tempest", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        slug: "the-tempest",
+        thumb: "images/the-tempest/SD-247-THE-TEMPEST.jpg",
+        images: [
+          "SD-035-THE-TEMPEST.jpg","SD-056-THE-TEMPEST.jpg",
+          "SD-106-THE-TEMPEST.jpg","SD-118-THE-TEMPEST-cropped.jpg","SD-234-THE-TEMPEST.jpg",
+          "SD-247-THE-TEMPEST.jpg","SD-284-THE-TEMPEST.jpg","SD-343-THE-TEMPEST.jpg",
+          "SD-459-THE-TEMPEST.jpg","SD-516-THE-TEMPEST.jpg","SD-543-THE-TEMPEST.jpg",
+          "Tempest-Costume-Rendering-e1572632538941.jpg",
+        ]
+      },
+      {
+        title: "Much Ado About Nothing", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        slug: "much-ado-about-nothing",
+        thumb: "images/much-ado-about-nothing/SD-097-MUCH-ADO-1024x681.jpg",
+        images: [
+          "SD-097-MUCH-ADO.jpg","SD-189-MUCH-ADO.jpg","SD-207-MUCH-ADO.jpg",
+          "SD-268-MUCH-ADO.jpg","SD-297-MUCH-ADO.jpg","SD-346-MUCH-ADO.jpg",
+          "SD-359-MUCH-ADO.jpg","SD-363-MUCH-ADO.jpg",
+        ]
+      },
+      {
+        title: "Tartuffe", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        slug: "tartuffe",
+        thumb: "images/tartuffe/SD-057-TARTUFFE-1024x681.jpg",
+        images: [
+          "SD-049-TARTUFFE.jpg","SD-057-TARTUFFE.jpg",
+          "SD-110-TARTUFFE.jpg","SD-124-TARTUFFE.jpg","SD-176-TARTUFFE.jpg",
+          "SD-370-TARTUFFE.jpg","SD-423-TARTUFFE.jpg","l_260104140328.jpg",
+        ]
+      },
+      {
+        title: "King Lear", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        slug: "king-lear",
+        thumb: "images/king-lear/SD-336-KING-LEAR-1-1024x681.jpg",
+        images: [
+          "SD-115A-KING-LEAR.jpg","SD-336-KING-LEAR.jpg",
+          "king-lear.jpg","NGL_19lear01.jpg",
+        ]
+      },
+      {
+        title: "She Stoops to Conquer", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        slug: "she-stoops-to-conquer",
+        thumb: "images/she-stoops-to-conquer/unspecified-10-1024x682.jpg",
+        images: [
+          "She-Stoops-Fabric.jpeg","unspecified-2-1024x682.jpg","unspecified-10-1024x682.jpg",
+          "unspecified-19-e1572471785797-1024x633.jpg","unspecified-22-1024x682.jpg",
+          "unspecified-24-e1572471742132-1024x616.jpg","unspecified-27-e1572471709300-1024x748.jpg",
+          "unspecified-33-e1572470759604-1024x728.jpg","unspecified-40-e1572470676157-1024x685.jpg",
+          "unspecified-e1572471833295-1024x740.jpg",
+        ]
+      },
+      {
+        title: "Br'er Cotton", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        slug: "brer-cotton",
+        thumb: "images/brer-cotton/Cotton-Archive_51-1024x682.jpg",
+        images: [
+          "Cotton-Archive_6.jpg","Cotton-Archive_24.jpg",
+          "Cotton-Archive_25.jpg","Cotton-Archive_34.jpg","Cotton-Archive_49.jpg",
+          "Cotton-Archive_50.jpg","Cotton-Archive_51.jpg",
+          "Cotton-Archive28-e1572627856379.jpg","cotton1-e1572627795114.jpg",
+        ]
+      },
+      {
+        title: "Beauty Queen of Leenane", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        slug: "the-beauty-queen-of-leenane",
+        thumb: "images/the-beauty-queen-of-leenane/BQ-MM1-Large-1024x682.jpg",
+        images: [
+          "Production-Photo-BEAUTY-QUEEN-3.jpg","BQ-MM1-Large-1024x682.jpg",
+          "MG_0318-1024x682.jpg","MG_0443-1-682x1024.jpg","MG_0758-1-682x1024.jpg",
+          "NGD_08beauty_02-1024x819.jpg","Beauty-Queen-Rendering-scaled.jpeg",
+        ]
+      },
+      {
+        title: "Se Llama Cristina", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        slug: "se-llama-cristina",
+        thumb: "images/se-llama-cristina/Production-Photo-SE-LLAMA-3-1024x682.jpg",
+        images: [
+          "Production-Photo-SE-LLAMA-3.jpg","Se-Llama_041.jpg","Se-Llama_661.jpg",
+          "Se-Llama_722.jpg","CRISTINA3-1.jpg","4-1024x682.jpg","5-1024x682.jpg",
+        ]
+      },
+      {
+        title: "The Dumb Waiter", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        slug: "dumb-waiter",
+        thumb: "images/dumb-waiter/DUMB-WAITER-ARCHIVE_0041-1024x682.jpg",
+        images: [
+          "DUMB-WAITER-ARCHIVE_0041.jpg","DUMB-WAITER-ARCHIVE_0255-2.jpg",
+          "DUMB-WAITER-ARCHIVE_0331-2.jpg","DUMB-WAITER-ARCHIVE_0611-2.jpg",
+          "waiter-1-1024x682.jpg",
+        ]
+      },
+      {
+        title: "Death is a Bad Habit", company: "Pegasus Theatre", filter: "pegasus",
+        slug: "death-is-a-bad-habit",
+        thumb: "images/death-is-a-bad-habit/deathis-1024x682.jpg",
+        images: [
+          "l_430701150817.jpg","l_430701150823.jpg","l_430701150834.jpg",
+          "248520_original-1024x768.jpg","deathis-1024x682.jpg",
+          "Death-is-a-Bad-Habit-Pegasus-Theatre_E41A3250.jpg",
+          "12604774_10154615963504465_5301870849989130583_o-1024x404.jpg",
+        ]
+      },
+      {
+        title: "Love's Labour's Lost", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        slug: "loves-labors-lost",
+        thumb: "images/loves-labors-lost/Loves-Labour-Ladies-Swimsuits.jpg",
+        images: [
+          "Loves-Labour-Armado-e1572631149876.jpg","Loves-Labour-Biron-e1572632116586.jpg",
+          "Loves-Labour-Dull.jpg","Loves-Labour-Hunter-e1572630040992.jpg",
+          "Loves-Labour-Ladies-Suit-e1572631208994.jpg","Loves-Labour-Ladies-Swimsuits.jpg",
+        ]
+      },
+      {
+        title: "Man and Superman", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        slug: "man-and-superman",
+        thumb: "images/man-and-superman/Man-and-Superman-Ann.jpg",
+        thumbPosition: "top",
+        images: [
+          "Man-and-Superman-Ann.jpg","Man-and-Superman-Jack.jpg",
+          "Man-and-Superman-Jack-Driving.jpg",
+          "Man-and-Superman-Octavius.jpg","Man-and-Superman-Violet-e1572371499241.jpg",
+          "Man-and-Superman-Costume-Rendering-e1572632503111.jpg","arts_review2.jpg",
+        ]
+      },
+      {
+        title: "Mary Stuart", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        slug: "mary-stuart",
+        thumb: "images/mary-stuart/Mary-Stuart-White.jpg",
+        images: [
+          "Mary-Stuart-White.jpg","Mary-Stuart-Black-e1572738833167.jpg",
+          "Mary-Stuart-Elizabeth.jpg","Mary-Stuart-Elizabeth-Seated.jpg",
+          "Mary-Stuart-Men.jpg",
+          "Mary-Stuart-Costume-Rendering1-e1572632400581.jpg",
+        ]
+      },
+      {
+        title: "A Midsummer Night\u2019s Dream", company: "UT Austin", filter: "ut-austin",
+        slug: "midsummer-ut-austin",
+        thumb: "images/midsummer-ut-austin/UT-Midsummer-604-1024x683.jpg",
+        images: [
+          "UT-Midsummer-604.jpg","UT-Midsummer-381.jpg",
+          "UT-Midsummer-726.jpg","UT-Midsummer-489.jpg",
+          "UT-Midsummer-240.jpg",
+          "UT-Midsummer-Group-Wide.jpg","UT-Midsummer-Group-Tall.jpg",
+          "UT-Midsummer-Group-273.jpg",
+          "UT-Midsummer-Play.jpg","UT-Midsummer-Bottom.jpg",
+          "UT-Midsummer-Lover-Close.jpg",
+          "UT-Midsummer-Rendering.jpg",
+          "UT-Midsummer-Fairies.jpg",
+          "UT-Midsummer-Lion.jpg",
+          "UT-Midsummer-Titania.jpeg","UT-Midsummer-Titania-Sketch.jpg",
+        ]
+      },
+      {
+        title: "A Midsummer Night\u2019s Dream", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        slug: "midsummer-austin-shakespeare",
+        thumb: "images/midsummer-austin-shakespeare/ASM-Midsummer-Mechanicals.jpg",
+        images: [
+          "ASM-Midsummer-Mechanicals.jpg","ASM-Midsummer-Puck.jpg",
+          "ASM-Midsummer-Oberon.jpg","ASM-Midsummer-Fairy.jpg",
+          "ASM-Midsummer-Lovers.jpg",
+          "ASM-Midsummer-Rendering.jpg",
+        ]
+      },
+      {
+        title: "Assassins", company: "UT Austin", filter: "ut-austin",
+        slug: "assassins",
+        thumb: "images/assassins/Assassins-McKinley1.jpg",
+        images: [
+          "Assassins-McKinley1.jpg","Assassins-Squeaky-and-Moore1.jpg",
+          "Assassins-Santa-Suit1.jpg","Assassins-1930s1.jpg",
+          "Assassins-Balladeer.jpg","Assassins-Booth-e1572632654770.jpg",
+          "Assassins-Grou-e1572633069372.jpg",
+          "Assassins-Costume-Rendering-e1572632679297.jpg",
+        ]
+      },
+      {
+        title: "Aria Redux", company: "UT Austin", filter: "ut-austin",
+        slug: "aria-redux",
+        thumb: "images/aria-redux/C38F81CC-E852-45F9-8AEA-39F7394986AE_1_105_c-1024x604.jpeg",
+        images: [
+          "C38F81CC-E852-45F9-8AEA-39F7394986AE_1_105_c.jpeg",
+          "2B15CEE7-2C20-4F45-89F3-22830700AF3D_1_105_c.jpeg",
+          "B5DD26F4-9158-4187-912B-478C8CFE8875_1_105_c.jpeg",
+          "C7878E5F-FC40-4295-9B57-1515375A470D_1_105_c.jpeg",
+          "F96372A6-BE3E-4A03-BBA6-4F3C179209D5_1_105_c.jpeg",
+          "Aria-Group1.jpg","Aria-Tutu.jpg","Aria-Panniers.jpg",
+          "Aria-Costume-Rendering-e1572632740287.jpg",
+        ]
+      },
+    ];
+
+    // ── Render Portfolio Grid ──────────────────────────
+    const grid = document.getElementById('portfolioGrid');
+
+    function renderGrid(filter) {
+      const filtered = filter === 'all' ? shows : shows.filter(s => s.filter === filter);
+      grid.innerHTML = '';
+      filtered.forEach(show => {
+        const card = document.createElement('div');
+        card.className = 'show-card';
+        const img = document.createElement('img');
+        img.src = show.thumb;
+        img.alt = show.title;
+        img.loading = 'lazy';
+        if (show.thumbPosition) img.style.objectPosition = show.thumbPosition;
+        img.onload = () => img.classList.add('loaded');
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        overlay.innerHTML = `
+            <h3>${show.title}</h3>
+            <span class="company">${show.company}</span>
+            <span class="count">${show.images.length} photos</span>
+        `;
+        card.appendChild(img);
+        card.appendChild(overlay);
+        card.addEventListener('click', () => openLightbox(show));
+        grid.appendChild(card);
+      });
+    }
+    renderGrid('all');
+
+    // ── Filter Buttons ─────────────────────────────────
+    document.getElementById('filterBar').addEventListener('click', e => {
+      if (!e.target.classList.contains('filter-btn')) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      renderGrid(e.target.dataset.filter);
+    });
+
+    // ── Lightbox ───────────────────────────────────────
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightboxContent');
+
+    function openLightbox(show) {
+      const imgDir = `images/${show.slug}/`;
+      const imagesHtml = show.images.map(f =>
+        `<img src="${imgDir}${f}" alt="${show.title}" loading="lazy">`
+      ).join('');
+      lightboxContent.innerHTML = `
+        <h2>${show.title}</h2>
+        <div class="company-tag">${show.company}</div>
+        <div class="lightbox-gallery">${imagesHtml}</div>
+      `;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── Nav ────────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 80));
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.add('open'));
+    document.getElementById('navClose').addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+  </script>
+</body>
+</html>
