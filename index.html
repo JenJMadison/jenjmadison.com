@@ -63,17 +63,53 @@
     }
     @media (min-width: 769px) { .nav-close { display: none; } }
 
-    /* ── Hero ──────────────────────────────────────────── */
+    /* ── Hero with Carousel Background ────────────────── */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
       text-align: center; padding: 6rem 2rem 4rem;
       position: relative; overflow: hidden;
     }
+
+    /* Carousel background images */
+    .hero-carousel {
+      position: absolute; inset: 0;
+      z-index: 0;
+    }
+
+    .carousel-image {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0;
+      animation: carouselFade 20s infinite;
+    }
+
+    .carousel-image:nth-child(1) { animation-delay: 0s; }
+    .carousel-image:nth-child(2) { animation-delay: 5s; }
+    .carousel-image:nth-child(3) { animation-delay: 10s; }
+    .carousel-image:nth-child(4) { animation-delay: 15s; }
+
+    @keyframes carouselFade {
+      0% { opacity: 0; }
+      5% { opacity: 1; }
+      25% { opacity: 1; }
+      30% { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* Dark overlay for readability */
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, rgba(184,169,154,0.08) 0%, transparent 70%);
+      background: rgba(10,10,10,0.75);
+      z-index: 1;
     }
+
+    /* Content z-index to appear above carousel and overlay */
+    .hero h1, .hero .subtitle, .hero .tagline, .hero .scroll-indicator {
+      position: relative;
+      z-index: 2;
+    }
+
     .hero h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3rem, 8vw, 6rem);
@@ -295,11 +331,16 @@
     </ul>
   </nav>
 
-  <!-- ── Hero ────────────────────────────────────────── -->
+  <!-- ── Hero with Carousel Background ─────────────── -->
   <section class="hero" id="home">
+    <div class="hero-carousel">
+      <div class="carousel-image" style="background-image: url('images/lucia-di-lammermoor/DSC03307.jpg');"></div>
+      <div class="carousel-image" style="background-image: url('images/king-lear/SD-115A-KING-LEAR.jpg');"></div>
+      <div class="carousel-image" style="background-image: url('images/much-ado-about-nothing/SD-363-MUCH-ADO.jpg');"></div>
+      <div class="carousel-image" style="background-image: url('images/midsummer-ut-austin/UT-Midsummer-604.jpg');"></div>
+    </div>
     <h1>Jen J Madison</h1>
     <p class="subtitle">Costume Designer</p>
-    <p class="tagline"></p>
     <div class="scroll-indicator">&#8595;</div>
   </section>
 
