@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV &mdash; Jen J Madison, Costume Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #e8e4e0;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Back link ──────────────────────────────────────── */
+    .back-link {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2.5rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .back-link a {
+      color: #b8a99a; font-size: 0.85rem; letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .back-link a:hover { color: #e8e4e0; }
+
+    /* ── CV Container ──────────────────────────────────── */
+    .cv-page {
+      max-width: 800px; margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+    }
+
+    /* Header */
+    .cv-header { margin-bottom: 3rem; }
+    .cv-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 400; margin-bottom: 0.3rem;
+    }
+    .cv-header .subtitle {
+      font-size: 0.95rem; color: #aaa; font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+    .cv-header .subtitle a { color: #b8a99a; border-bottom: 1px solid rgba(184,169,154,0.3); }
+
+    /* Section headings */
+    .cv-section-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: #b8a99a;
+      border-bottom: 1px solid rgba(184,169,154,0.25);
+      padding-bottom: 0.5rem;
+      margin-top: 2.5rem; margin-bottom: 1.2rem;
+    }
+
+    /* Sub-headings (Opera, Theater, etc.) */
+    .cv-sub-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-style: italic;
+      color: #ccc;
+      margin-top: 1.5rem; margin-bottom: 0.6rem;
+    }
+
+    /* Entry rows */
+    .cv-entry {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.2rem 0;
+      font-size: 0.88rem;
+    }
+    .cv-entry .title { font-style: italic; flex-shrink: 0; }
+    .cv-entry .detail { color: #aaa; margin-left: 0.5rem; flex: 1; }
+    .cv-entry .date {
+      color: #777; font-size: 0.82rem; white-space: nowrap;
+      margin-left: 1rem; flex-shrink: 0;
+    }
+
+    /* Simple entry (bold label + detail) */
+    .cv-simple {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.2rem 0; font-size: 0.88rem;
+    }
+    .cv-simple .label { font-weight: 500; flex-shrink: 0; }
+    .cv-simple .detail { color: #aaa; margin-left: 0.5rem; flex: 1; }
+    .cv-simple .date { color: #777; font-size: 0.82rem; white-space: nowrap; margin-left: 1rem; flex-shrink: 0; }
+
+    /* Indent line */
+    .cv-indent {
+      padding-left: 1.2rem; font-size: 0.82rem; color: #888;
+      padding-bottom: 0.15rem;
+    }
+
+    /* Education block */
+    .cv-edu {
+      margin-bottom: 0.8rem;
+    }
+    .cv-edu .degree {
+      font-weight: 500; font-size: 0.9rem;
+    }
+    .cv-edu .school {
+      color: #aaa; font-size: 0.85rem;
+    }
+    .cv-edu .thesis {
+      color: #888; font-size: 0.82rem; font-style: italic;
+      padding-left: 1.2rem; margin-top: 0.15rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .cv-entry, .cv-simple { flex-wrap: wrap; }
+      .cv-entry .date, .cv-simple .date { margin-left: 0; width: 100%; font-size: 0.78rem; }
+      .cv-page { padding: 5rem 1.2rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="back-link"><a href="index.html">&larr; Back to Portfolio</a></div>
+
+<div class="cv-page">
+  <div class="cv-header">
+    <h1>Jen J. Madison</h1>
+    <div class="subtitle">Costume Designer &nbsp;&middot;&nbsp; <a href="index.html">www.jenjmadison.com</a></div>
+  </div>
+
+  <!-- ── EDUCATION ─────────────────────────────────────── -->
+  <div class="cv-section-title">Education</div>
+  <div class="cv-edu">
+    <div class="cv-simple"><span class="degree">Master of Fine Arts, Theatrical Design</span><span class="date">May 2009</span></div>
+    <div class="school">The University of Texas at Austin</div>
+    <div class="thesis">Thesis: The Poet and the Philosopher &mdash; a performance using costume as visual text</div>
+  </div>
+  <div class="cv-edu">
+    <div class="cv-simple"><span class="degree">Bachelor of Arts, Theatre Arts</span><span class="date">June 2004</span></div>
+    <div class="school">Eastern Oregon University &mdash; Summa Cum Laude</div>
+  </div>
+  <div class="cv-edu">
+    <div class="cv-simple"><span class="degree">Associate of Arts, Oregon Transfer Degree</span><span class="date">June 2001</span></div>
+    <div class="school">Blue Mountain Community College &mdash; High Honors</div>
+  </div>
+
+  <!-- ── COSTUME DESIGN ────────────────────────────────── -->
+  <div class="cv-section-title">Costume Design</div>
+
+  <div class="cv-sub-title">Opera</div>
+  <div class="cv-entry"><span class="title">La Boh&egrave;me</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Oct 2025</span></div>
+  <div class="cv-entry"><span class="title">Beatrice + Benedict</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Apr 2025</span></div>
+  <div class="cv-entry"><span class="title">Cavalleria Rusticana</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Apr 2025</span></div>
+  <div class="cv-entry"><span class="title">Cendrillon</span><span class="detail">Opera Orlando, James Marvel</span><span class="date">Feb 2025</span></div>
+  <div class="cv-entry"><span class="title">MacBeth</span><span class="detail">Opera Orlando, Matt Haney</span><span class="date">Oct 2024</span></div>
+  <div class="cv-entry"><span class="title">Lucia di Lammermoor</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Apr 2024</span></div>
+  <div class="cv-entry"><span class="title">Tosca</span><span class="detail">Opera Orlando, Josh Shaw</span><span class="date">Oct 2023</span></div>
+  <div class="cv-entry"><span class="title">Alcina</span><span class="detail">University of Michigan, Grant Preisser</span><span class="date">Apr 2019</span></div>
+
+  <div class="cv-sub-title">Theater</div>
+  <div class="cv-entry"><span class="title">Lost Girl</span><span class="detail">Emory University, Kimberly Belflower</span><span class="date">Sep 2023</span></div>
+  <div class="cv-entry"><span class="title">Garden</span><span class="detail">Echo Community, Joey Martineck</span><span class="date">July 2023</span></div>
+  <div class="cv-entry"><span class="title">A Prayer for the French Republic</span><span class="detail">Actor&rsquo;s Express, Freddie Ashley</span><span class="date">Apr 2023</span></div>
+  <div class="cv-entry"><span class="title">The Taming of the Shrew</span><span class="detail">Shakespeare Dallas, Jenny Stewart</span><span class="date">June 2018</span></div>
+  <div class="cv-entry"><span class="title">Comedy of Errors</span><span class="detail">Shakespeare Dallas, Raphael Parry</span><span class="date">June 2018</span></div>
+  <div class="cv-entry"><span class="title">Titus Andronicus</span><span class="detail">Shakespeare Dallas, Christie Vela</span><span class="date">Sep 2017</span></div>
+  <div class="cv-entry"><span class="title">Br&rsquo;er Cotton</span><span class="detail">Kitchen Dog Theater, Rhonde Boutte</span><span class="date">June 2017</span></div>
+  <div class="cv-entry"><span class="title">Death on Delivery</span><span class="detail">Pegasus Theatre, Michael Serrecchia</span><span class="date">Jan 2017</span></div>
+  <div class="cv-entry"><span class="title">Mr. Burns, a Post-Electric Play</span><span class="detail">Louisiana State University, Steven Young</span><span class="date">Nov 2016</span></div>
+  <div class="cv-entry"><span class="title">A Stain on the Silence</span><span class="detail">Kitchen Dog Theater, Tim Johnson</span><span class="date">Oct 2016</span></div>
+  <div class="cv-entry"><span class="title">The Tempest</span><span class="detail">Shakespeare Dallas, Rene Moreno</span><span class="date">Sep 2016</span></div>
+  <div class="cv-entry"><span class="title">It&rsquo;s Beginning to Look a Lot Like Murder</span><span class="detail">Pegasus Theatre, Michael Serrecchia</span><span class="date">July 2016</span></div>
+  <div class="cv-entry"><span class="title">Richard III</span><span class="detail">Shakespeare Dallas, Stefan Novinski</span><span class="date">June 2016</span></div>
+  <div class="cv-entry"><span class="title">She Stoops to Conquer</span><span class="detail">Shakespeare Dallas, Mason York</span><span class="date">June 2016</span></div>
+  <div class="cv-entry"><span class="title">Death is a Bad Habit</span><span class="detail">Pegasus Theatre, Michael Serrecchia</span><span class="date">Jan 2016</span></div>
+  <div class="cv-entry"><span class="title">The Dumb Waiter</span><span class="detail">Kitchen Dog Theater, Tim Johnson</span><span class="date">Sep 2015</span></div>
+  <div class="cv-entry"><span class="title">King Lear</span><span class="detail">Shakespeare Dallas, Raphael Parry</span><span class="date">Sep 2015</span></div>
+  <div class="cv-entry"><span class="title">The Golden Apple</span><span class="detail">Irving Lyric Stage, Stefan Novinski</span><span class="date">Oct 2014</span></div>
+  <div class="cv-entry"><span class="title">None of the Above</span><span class="detail">Church Mouse Production, Jared Culpepper</span><span class="date">Aug 2014</span></div>
+  <div class="cv-entry"><span class="title">The Watch</span><span class="detail">Church Mouse Production, Jordan Willis</span><span class="date">July 2014</span></div>
+  <div class="cv-entry"><span class="title">Much Ado About Nothing</span><span class="detail">Shakespeare Dallas, Patrick Kelly</span><span class="date">June 2014</span></div>
+  <div class="cv-entry"><span class="title">Tartuffe</span><span class="detail">Shakespeare Dallas, Raphael Parry</span><span class="date">June 2014</span></div>
+  <div class="cv-entry"><span class="title">The Motherf**ker with the Hat</span><span class="detail">Kitchen Dog Theater, Jaime Castaneda</span><span class="date">Feb 2014</span></div>
+  <div class="cv-entry"><span class="title">Rehearsal for Murder</span><span class="detail">Pegasus Theatre, Michael Serrecchia</span><span class="date">Jan 2014</span></div>
+  <div class="cv-entry"><span class="title">Detroit</span><span class="detail">Kitchen Dog Theater, Tim Johnson</span><span class="date">Sep 2013</span></div>
+  <div class="cv-entry"><span class="title">Hate Mail</span><span class="detail">Church Mouse Production, Jared Culpepper</span><span class="date">Aug 2013</span></div>
+  <div class="cv-entry"><span class="title">Se Llama Cristina</span><span class="detail">Kitchen Dog Theater, Christie Vela</span><span class="date">May 2013</span></div>
+  <div class="cv-entry"><span class="title">XSR: DIE!</span><span class="detail">Pegasus Theatre, Michael Serrecchia</span><span class="date">Jan 2013</span></div>
+  <div class="cv-entry"><span class="title">Beauty Queen of Leenane</span><span class="detail">Kitchen Dog Theater, Cameron Cobb</span><span class="date">Nov 2012</span></div>
+  <div class="cv-entry"><span class="title">A Better Doctor</span><span class="detail">UpStart Productions, Justin Locklear</span><span class="date">Apr 2012</span></div>
+  <div class="cv-entry"><span class="title">A Lie of the Mind</span><span class="detail">Mary Moody Northen Theatre, Jared J. Stein</span><span class="date">Nov 2011</span></div>
+  <div class="cv-entry"><span class="title">Love&rsquo;s Labour&rsquo;s Lost</span><span class="detail">Austin Shakespeare Festival, Robert Faires</span><span class="date">May 2011</span></div>
+  <div class="cv-entry"><span class="title">Man and Superman</span><span class="detail">Austin Shakespeare Festival, Ann Ciccolella</span><span class="date">Feb 2011</span></div>
+  <div class="cv-entry"><span class="title">Anthem</span><span class="detail">Austin Shakespeare Festival, Ann Ciccolella</span><span class="date">Jan 2011</span></div>
+  <div class="cv-entry"><span class="title">Who&rsquo;s Afraid of Virginia Woolf</span><span class="detail">Mary Moody Northen Theatre, Christina J. Moore</span><span class="date">Nov 2010</span></div>
+  <div class="cv-entry"><span class="title">The Man Who Came to Dinner</span><span class="detail">Southwestern University, Jared J. Stein</span><span class="date">Oct 2010</span></div>
+  <div class="cv-entry"><span class="title">The Tempest</span><span class="detail">Austin Shakespeare Festival, Ann Ciccolella</span><span class="date">Sep 2010</span></div>
+  <div class="cv-entry"><span class="title">Annie</span><span class="detail">Zilker Theatre Productions, Michael McKelvey</span><span class="date">July 2010</span></div>
+  <div class="cv-entry"><span class="title">A Midsummer Night&rsquo;s Dream</span><span class="detail">Austin Shakespeare Festival, Ann Ciccolella</span><span class="date">Apr 2010</span></div>
+  <div class="cv-entry"><span class="title">City of Angels</span><span class="detail">Mary Moody Northen Theatre, Michael McKelvey</span><span class="date">Apr 2010</span></div>
+  <div class="cv-entry"><span class="title">Mary Stuart</span><span class="detail">Austin Shakespeare Festival, Ann Ciccolella</span><span class="date">Feb 2010</span></div>
+  <div class="cv-entry"><span class="title">The Poet and the Philosopher</span><span class="detail">University Co-op &mdash; Cohen New Works Festival</span><span class="date">Apr 2009</span></div>
+  <div class="cv-entry"><span class="title">A Midsummer Night&rsquo;s Dream</span><span class="detail">The University of Texas at Austin, Paul Mullins</span><span class="date">Nov 2008</span></div>
+  <div class="cv-entry"><span class="title">Assassins</span><span class="detail">The University of Texas at Austin, Rod Caspers</span><span class="date">Apr 2008</span></div>
+  <div class="cv-entry"><span class="title">Once Upon a Mattress</span><span class="detail">La Grande High School, Sam Jacobson</span><span class="date">Apr 2004</span></div>
+  <div class="cv-entry"><span class="title">The Taming of the Shrew</span><span class="detail">Eastern Oregon University, Lyle Schwarz</span><span class="date">Feb 2004</span></div>
+  <div class="cv-entry"><span class="title">A Flea in Her Ear</span><span class="detail">Eastern Oregon University, Ken Bush</span><span class="date">Nov 2002</span></div>
+  <div class="cv-entry"><span class="title">Closer</span><span class="detail">Eastern Oregon University, Lisa Giambastiani</span><span class="date">Oct 2002</span></div>
+  <div class="cv-entry"><span class="title">The Maids</span><span class="detail">Eastern Oregon University, James D. Clayton</span><span class="date">Apr 2002</span></div>
+  <div class="cv-entry"><span class="title">As You Like It</span><span class="detail">Blue Mountain Community College, Joanna Goff</span><span class="date">Feb 2001</span></div>
+
+  <div class="cv-sub-title">Film</div>
+  <div class="cv-entry"><span class="title">Bit Parts</span><span class="detail">Blue Goggle Films, Ben Moody</span><span class="date">Oct 2011</span></div>
+  <div class="cv-entry"><span class="title">Mummy</span><span class="detail">Blue Goggle Films, Ben Moody</span><span class="date">Aug 2009</span></div>
+
+  <div class="cv-sub-title">Dance</div>
+  <div class="cv-entry"><span class="title">Sextet</span><span class="detail">Dance Repertory Theater, Yakvo Shair</span><span class="date">Feb 2009</span></div>
+  <div class="cv-entry"><span class="title">Parade</span><span class="detail">Dance Repertory Theater, Yakvo Shair</span><span class="date">Feb 2007</span></div>
+  <div class="cv-entry"><span class="title">Chrysalis</span><span class="detail">Cohen New Works Festival, Mary Chase</span><span class="date">Apr 2007</span></div>
+  <div class="cv-entry"><span class="title">Aria Redux</span><span class="detail">The University of Texas at Austin, Harrison McEldowny</span><span class="date">Feb 2007</span></div>
+
+  <!-- ── TECHNICAL SKILLS ──────────────────────────────── -->
+  <div class="cv-section-title">Technical Skills</div>
+
+  <div class="cv-sub-title">Fabric Dyeing &amp; Distressing</div>
+  <div class="cv-entry"><span class="title">Lucia di Lammermoor</span><span class="detail">Opera Orlando</span><span class="date">Apr 2024</span></div>
+  <div class="cv-entry"><span class="title">Br&rsquo;er Cotton</span><span class="detail">Kitchen Dog Theater</span><span class="date">June 2017</span></div>
+  <div class="cv-entry"><span class="title">Richard III</span><span class="detail">Shakespeare Dallas</span><span class="date">June 2016</span></div>
+  <div class="cv-entry"><span class="title">King Lear</span><span class="detail">Shakespeare Dallas</span><span class="date">Sep 2015</span></div>
+  <div class="cv-entry"><span class="title">Se Llama Cristina</span><span class="detail">Kitchen Dog Theater</span><span class="date">May 2013</span></div>
+  <div class="cv-entry"><span class="title">Beauty Queen of Leenane</span><span class="detail">Kitchen Dog Theater</span><span class="date">Nov 2012</span></div>
+  <div class="cv-entry"><span class="title">Anthem</span><span class="detail">Austin Shakespeare Festival</span><span class="date">Jan 2011</span></div>
+  <div class="cv-entry"><span class="title">Annie</span><span class="detail">Zilker Theatre Productions</span><span class="date">July 2010</span></div>
+  <div class="cv-entry"><span class="title">The Poet and the Philosopher</span><span class="detail">Cohen New Works Festival</span><span class="date">Apr 2009</span></div>
+  <div class="cv-entry"><span class="title">Assassins</span><span class="detail">The University of Texas at Austin</span><span class="date">Apr 2007</span></div>
+  <div class="cv-entry"><span class="title">Aria Redux</span><span class="detail">The University of Texas at Austin</span><span class="date">Apr 2007</span></div>
+  <div class="cv-entry"><span class="title">Children of Eden</span><span class="detail">Arkansas Repertory Theater</span><span class="date">Nov 2004</span></div>
+
+  <div class="cv-sub-title">Fabric Painting</div>
+  <div class="cv-entry"><span class="title">The Tempest (silk pants)</span><span class="detail">Shakespeare Dallas</span><span class="date">Sep 2016</span></div>
+  <div class="cv-entry"><span class="title">Way of the World (fans)</span><span class="detail">The University of Texas at Austin</span><span class="date">Nov 2006</span></div>
+  <div class="cv-entry"><span class="title">Children of Eden (leotards)</span><span class="detail">Arkansas Repertory Theater</span><span class="date">Nov 2004</span></div>
+
+  <div class="cv-sub-title">Millinery</div>
+  <div class="cv-entry"><span class="title">Cavalleria Rusticana</span><span class="detail">Opera Orlando</span><span class="date">Apr 2024</span></div>
+  <div class="cv-entry"><span class="title">XSR: DIE!</span><span class="detail">Pegasus Theatre</span><span class="date">Jan 2013</span></div>
+  <div class="cv-entry"><span class="title">Man and Superman</span><span class="detail">Austin Shakespeare Festival</span><span class="date">Feb 2011</span></div>
+  <div class="cv-entry"><span class="title">Mary Stuart</span><span class="detail">Austin Shakespeare Festival</span><span class="date">Feb 2010</span></div>
+  <div class="cv-entry"><span class="title">The Poet and the Philosopher</span><span class="detail">Cohen New Works Festival</span><span class="date">Apr 2009</span></div>
+  <div class="cv-entry"><span class="title">Way of the World</span><span class="detail">The University of Texas at Austin</span><span class="date">Nov 2006</span></div>
+  <div class="cv-entry"><span class="title">Triumph of Love</span><span class="detail">The Cleveland Playhouse</span><span class="date">Nov 2005</span></div>
+  <div class="cv-entry"><span class="title">Ain&rsquo;t Misbehavin&rsquo;</span><span class="detail">Arkansas Repertory Theater</span><span class="date">Apr 2005</span></div>
+
+  <div class="cv-sub-title">Masks</div>
+  <div class="cv-entry"><span class="title">Mr. Burns, a Post-Electric Play</span><span class="detail">Louisiana State University</span><span class="date">Nov 2016</span></div>
+  <div class="cv-entry"><span class="title">Brer Wood</span><span class="detail">The University of Texas at Austin</span><span class="date">Feb 2009</span></div>
+
+  <div class="cv-sub-title">Special Coursework</div>
+  <div class="cv-simple"><span class="label">Mask Making</span><span class="detail">UT Austin, Jim Galven</span><span class="date">Fall 2008</span></div>
+  <div class="cv-simple"><span class="label">Digital Rendering</span><span class="detail">UT Austin, Bob Schmidt</span><span class="date">Spring 2008</span></div>
+  <div class="cv-simple"><span class="label">Figure Painting</span><span class="detail">UT Austin, Karen Maness</span><span class="date">Spring 2008</span></div>
+  <div class="cv-simple"><span class="label">Fabric Dyeing &amp; Painting</span><span class="detail">UT Austin</span><span class="date">Fall 2007</span></div>
+  <div class="cv-simple"><span class="label">Tailoring</span><span class="detail">UT Austin, Jim Galven</span><span class="date">Fall 2006</span></div>
+  <div class="cv-simple"><span class="label">Figure Drawing</span><span class="detail">UT Austin</span><span class="date">2006&ndash;2009</span></div>
+
+  <!-- ── TEACHING ──────────────────────────────────────── -->
+  <div class="cv-section-title">Teaching</div>
+  <div class="cv-simple"><span class="label">Guest Lecturer</span><span class="detail">Louisiana State University</span><span class="date">Oct&ndash;Nov 2016</span></div>
+  <div class="cv-indent">Graduate Costume Design II</div>
+  <div class="cv-simple"><span class="label">Assistant Instructor</span><span class="detail">St. Edward&rsquo;s University</span><span class="date">Jan&ndash;May 2011</span></div>
+  <div class="cv-indent">Costume Design I</div>
+  <div class="cv-simple"><span class="label">Assistant Instructor</span><span class="detail">The University of Texas at Austin</span><span class="date">Aug 2008&ndash;May 2009</span></div>
+  <div class="cv-indent">Introduction to Design</div>
+  <div class="cv-simple"><span class="label">Teaching Assistant</span><span class="detail">The University of Texas at Austin</span><span class="date">Aug 2007&ndash;May 2008</span></div>
+  <div class="cv-indent">Introduction to Design</div>
+  <div class="cv-simple"><span class="label">Student Instructor</span><span class="detail">Eastern Oregon University</span><span class="date">Mar&ndash;June 2004</span></div>
+  <div class="cv-indent">Costume Rendering</div>
+  <div class="cv-simple"><span class="label">Teaching Assistant</span><span class="detail">Eastern Oregon University</span><span class="date">Jan&ndash;Mar 2004</span></div>
+  <div class="cv-indent">Costume Technology</div>
+  <div class="cv-simple"><span class="label">Guest Instructor</span><span class="detail">Music, Art &amp; Drama Camp, Treasure Valley College</span><span class="date">July 2003</span></div>
+  <div class="cv-indent">Stage Combat I and II</div>
+  <div class="cv-simple"><span class="label">Teaching Assistant</span><span class="detail">Eastern Oregon University</span><span class="date">Jan&ndash;Mar 2003</span></div>
+  <div class="cv-indent">Costume Design</div>
+
+  <!-- ── ADDITIONAL THEATER EXPERIENCE ─────────────────── -->
+  <div class="cv-section-title">Additional Theater Experience</div>
+
+  <div class="cv-sub-title">Lighting Design</div>
+  <div class="cv-entry"><span class="title">The Poet and the Philosopher</span><span class="detail">Cohen New Works Festival</span><span class="date">Apr 2009</span></div>
+  <div class="cv-entry"><span class="title">Elephant&rsquo;s Graveyard</span><span class="detail">UT Austin, Laura Kepley</span><span class="date">Nov 2007</span></div>
+
+  <div class="cv-sub-title">Scenic Design</div>
+  <div class="cv-entry"><span class="title">Fuddy Meers</span><span class="detail">Eastern Oregon University, Rebekka Handshke</span><span class="date">June 2004</span></div>
+  <div class="cv-entry"><span class="title">The Taming of the Shrew</span><span class="detail">Eastern Oregon University, Lyle Schwarz</span><span class="date">Feb 2004</span></div>
+  <div class="cv-entry"><span class="title">Wit</span><span class="detail">Eastern Oregon University, Travis Gray</span><span class="date">Feb 2003</span></div>
+
+  <div class="cv-sub-title">Acting</div>
+  <div class="cv-entry"><span class="title">Brighton Beach Memoirs (Kate)</span><span class="detail">Eastern Oregon University, Dave Gammage</span><span class="date">Oct 2003</span></div>
+  <div class="cv-entry"><span class="title">Death Trap (Myra)</span><span class="detail">Eastern Oregon University, Jennifer Butler</span><span class="date">June 2003</span></div>
+  <div class="cv-entry"><span class="title">Playground (Wanda)</span><span class="detail">Eastern Oregon University, Tomi Griffen</span><span class="date">Apr 2002</span></div>
+  <div class="cv-entry"><span class="title">A Winter&rsquo;s Tale (Dorcas)</span><span class="detail">Eastern Oregon University, Ken Bush</span><span class="date">Nov 2001</span></div>
+  <div class="cv-entry"><span class="title">As You Like It (Lady)</span><span class="detail">Blue Mountain Community College, Joanna Goff</span><span class="date">Feb 2001</span></div>
+
+  <!-- ── WORK EXPERIENCE ───────────────────────────────── -->
+  <div class="cv-section-title">Work Experience</div>
+  <div class="cv-simple"><span class="label">Costume Shop Manager</span><span class="detail">Emory University (Our Town)</span><span class="date">Jan&ndash;Feb 2023</span></div>
+  <div class="cv-simple"><span class="label">Costume Supervisor</span><span class="detail">Shakespeare Dallas (A Winter&rsquo;s Tale)</span><span class="date">Aug&ndash;Sep 2013</span></div>
+  <div class="cv-simple"><span class="label">Costume Rentals</span><span class="detail">The University of Texas at Austin</span><span class="date">Aug&ndash;Dec 2006</span></div>
+  <div class="cv-simple"><span class="label">Costume Intern</span><span class="detail">The Cleveland Playhouse</span><span class="date">Sep&ndash;Dec 2005</span></div>
+  <div class="cv-simple"><span class="label">Wardrobe Supervisor</span><span class="detail">Arkansas Repertory Theatre</span><span class="date">Aug 2004&ndash;July 2005</span></div>
+  <div class="cv-simple"><span class="label">Costume Shop Supervisor</span><span class="detail">Eastern Oregon University</span><span class="date">Aug 2003&ndash;June 2004</span></div>
+  <div class="cv-simple"><span class="label">Living History Interpreter</span><span class="detail">National Historic Oregon Trail Interpretive Center</span><span class="date">June&ndash;Sep 2003</span></div>
+  <div class="cv-simple"><span class="label">Student Ambassador</span><span class="detail">Blue Mountain Community College</span><span class="date">June 2000&ndash;June 2001</span></div>
+
+  <!-- ── AWARDS & HONORS ───────────────────────────────── -->
+  <div class="cv-section-title">Awards &amp; Honors</div>
+  <div class="cv-simple"><span class="label">Outstanding Costume Design</span><span class="detail">Lucia di Lammermoor &mdash; Theatre Tampa Bay</span><span class="date">Nov 2024</span></div>
+  <div class="cv-simple"><span class="label">Nomination, Costume Design (Equity Play)</span><span class="detail">Death is a Bad Habit! &mdash; The Column</span><span class="date">Feb 2017</span></div>
+  <div class="cv-simple"><span class="label">Company Member</span><span class="detail">Kitchen Dog Theater</span><span class="date">2015&ndash;2017</span></div>
+  <div class="cv-simple"><span class="label">Resident Costume Designer</span><span class="detail">Pegasus Theatre, Dallas</span><span class="date">2014&ndash;2017</span></div>
+  <div class="cv-simple"><span class="label">Nomination, Best Costume Design</span><span class="detail">Who&rsquo;s Afraid of Virginia Woolf &mdash; Austin Chronicle</span><span class="date">May 2011</span></div>
+  <div class="cv-simple"><span class="label">Nomination, Best Costume Design</span><span class="detail">Mary Stuart &mdash; Austin Chronicle</span><span class="date">May 2010</span></div>
+  <div class="cv-simple"><span class="label">8 Best Things in Austin Theatre</span><span class="detail">Assassins &amp; A Midsummer Night&rsquo;s Dream &mdash; Austin Chronicle</span><span class="date">May 2009</span></div>
+  <div class="cv-simple"><span class="label">Nomination, Best Costume Design</span><span class="detail">Assassins &mdash; Austin Chronicle</span><span class="date">May 2008</span></div>
+  <div class="cv-simple"><span class="label">Merit Award</span><span class="detail">Wit &mdash; Kennedy Center</span><span class="date">Feb 2003</span></div>
+  <div class="cv-simple"><span class="label">Merit Award</span><span class="detail">A Flea in Her Ear &mdash; Kennedy Center</span><span class="date">Nov 2002</span></div>
+  <div class="cv-simple"><span class="label">CornerStone Award</span><span class="detail">Eastern Oregon University</span><span class="date">May 2004</span></div>
+  <div class="cv-simple"><span class="label">Presidential Scholar Candidate</span><span class="detail">Eastern Oregon University</span><span class="date">May 2004</span></div>
+  <div class="cv-simple"><span class="label">Honors Program</span><span class="detail">Eastern Oregon University</span><span class="date">2003&ndash;2004</span></div>
+  <div class="cv-simple"><span class="label">Dean&rsquo;s List</span><span class="detail">Eastern Oregon University</span><span class="date">2001&ndash;2004</span></div>
+  <div class="cv-simple"><span class="label">Academic Scholarship</span><span class="detail">Eastern Oregon University</span><span class="date">2001&ndash;2004</span></div>
+  <div class="cv-simple"><span class="label">Phi Theta Kappa</span><span class="detail">Blue Mountain Community College</span><span class="date">2000&ndash;2001</span></div>
+  <div class="cv-simple"><span class="label">President&rsquo;s List</span><span class="detail">Blue Mountain Community College</span><span class="date">1999&ndash;2001</span></div>
+
+</div>
+</body>
+</html>
