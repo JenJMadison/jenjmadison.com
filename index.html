@@ -289,6 +289,19 @@
       .lightbox-gallery.multi img.wide { grid-column: 1 / -1; }
     }
 
+    /* ── About ────────────────────────────────────────── */
+    #about { max-width: 720px; margin: 0 auto; }
+    .about-content p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #d8d4d0;
+      font-weight: 300;
+    }
+    .about-content p em {
+      font-style: italic;
+      color: #e8e4e0;
+    }
+
     /* ── CV Section ────────────────────────────────────── */
     #cv { max-width: 900px; margin: 0 auto; }
     .cv-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
@@ -402,6 +415,7 @@
     <div class="nav-links" id="navLinks">
       <button class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
       <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
       <a href="#cv">CV</a>
       <a href="#press">Press</a>
       <a href="#contact">Contact</a>
@@ -449,6 +463,17 @@
       <button class="filter-btn" data-filter="ut-austin">UT Austin</button>
     </div>
     <div class="portfolio-grid" id="portfolioGrid"></div>
+  </section>
+
+  <!-- ── About ────────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-header">
+      <h2>About</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="about-content">
+      <p>Jen J. Madison is a costume designer for opera and theatre. Recent and ongoing work includes productions for Opera Orlando, Shakespeare Dallas, Austin Shakespeare, Pegasus Theatre, and Kitchen Dog Theater. She holds an MFA in Theatrical Design from the University of Texas at Austin.</p>
+    </div>
   </section>
 
   <!-- ── CV ──────────────────────────────────────────── -->
