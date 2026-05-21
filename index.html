@@ -57,7 +57,7 @@
     ]
   }
   </script>
-  <title>Jen J Madison – Costume Design</title>
+  <title>Jen J Madison — Costume Designer for Opera & Theatre</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -214,8 +214,21 @@
       position: relative; overflow: hidden; border-radius: 3px;
       cursor: pointer; aspect-ratio: 3/2; background: #1a1a1a;
       transition: transform 0.3s, box-shadow 0.3s;
+      /* Reset <button> defaults — card is rendered as a real button for a11y. */
+      border: none; padding: 0; margin: 0; font: inherit; color: inherit;
+      text-align: left; width: 100%;
     }
     .show-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+    .show-card:focus-visible {
+      outline: 2px solid #b8a99a; outline-offset: 4px;
+    }
+    .lightbox-close:focus-visible,
+    .filter-btn:focus-visible,
+    .nav-links a:focus-visible,
+    .nav-toggle:focus-visible,
+    .nav-close:focus-visible {
+      outline: 2px solid #b8a99a; outline-offset: 3px;
+    }
     .show-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
     .show-card:hover img { transform: scale(1.05); }
     .show-card .overlay {
@@ -386,13 +399,13 @@
   <nav class="nav" id="nav">
     <div class="nav-brand">Jen J Madison <span>Costume Design</span></div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu">&#9776;</button>
-    <ul class="nav-links" id="navLinks">
+    <div class="nav-links" id="navLinks">
       <button class="nav-close" id="navClose" aria-label="Close menu">&times;</button>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#cv">CV</a></li>
-      <li><a href="#press">Press</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#cv">CV</a>
+      <a href="#press">Press</a>
+      <a href="#contact">Contact</a>
+    </div>
   </nav>
 
   <!-- ── Hero with Carousel Background ─────────────── -->
@@ -435,7 +448,7 @@
     <div class="cv-grid">
       <div class="cv-company">
         <h3>Opera Orlando</h3>
-        <ul><li>La Boh&egrave;me</li><li>Beatrice + Benedict</li><li>Cavalleria Rusticana</li><li>Cendrillon</li><li>MacBeth</li><li>Lucia di Lammermoor</li><li>Tosca</li></ul>
+        <ul><li>La Boh&egrave;me</li><li>Beatrice + Benedict</li><li>Cavalleria Rusticana</li><li>Cendrillon</li><li>Macbeth</li><li>Lucia di Lammermoor</li><li>Tosca</li></ul>
       </div>
       <div class="cv-company">
         <h3>Shakespeare Dallas</h3>
@@ -548,8 +561,11 @@
   <footer>&copy; 2026 Jen J Madison. All rights reserved.</footer>
 
   <!-- ── Lightbox ────────────────────────────────────── -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <div class="lightbox" id="lightbox"
+       role="dialog" aria-modal="true"
+       aria-labelledby="lightbox-title"
+       aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close gallery">&times;</button>
     <div class="lightbox-content" id="lightboxContent"></div>
   </div>
 
@@ -558,7 +574,7 @@
     const shows = [
       {
         title: "Lucia di Lammermoor", company: "Opera Orlando", filter: "opera-orlando",
-        year: 2024, director: "Grant Preisser", photographer: null,
+        year: 2024, director: "Grant Preisser", photographer: "Ashleigh Ann Gardner",
         slug: "lucia-di-lammermoor",
         thumb: "images/lucia-di-lammermoor/lucia-03521-thumb.jpg",
         images: [
@@ -582,7 +598,7 @@
       },
       {
         title: "Cendrillon", company: "Opera Orlando", filter: "opera-orlando",
-        year: 2025, director: "James Marvel", photographer: null,
+        year: 2025, director: "James Marvel", photographer: "Ashleigh Ann Gardner",
         slug: "cendrillon",
         thumb: "images/cendrillon/cendrillon-04-thumb.jpg",
         images: [
@@ -593,7 +609,7 @@
       },
       {
         title: "Macbeth", company: "Opera Orlando", filter: "opera-orlando",
-        year: 2024, director: "Matt Haney", photographer: null,
+        year: 2024, director: "Matt Haney", photographer: "Ashleigh Ann Gardner",
         slug: "macbeth",
         thumb: "images/macbeth/macbeth-04-thumb.jpg",
         images: [
@@ -604,7 +620,7 @@
       },
       {
         title: "Tosca", company: "Opera Orlando", filter: "opera-orlando",
-        year: 2023, director: "Josh Shaw", photographer: null,
+        year: 2023, director: "Josh Shaw", photographer: "Ashleigh Ann Gardner",
         slug: "tosca",
         thumb: "images/tosca/tosca-0196-thumb.jpg",
         images: [
@@ -616,7 +632,7 @@
       },
       {
         title: "The Tempest", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
-        year: 2016, director: "Rene Moreno", photographer: null,
+        year: 2016, director: "Rene Moreno", photographer: "Linda Blase",
         slug: "the-tempest",
         thumb: "images/the-tempest/sd-247-the-tempest.jpg",
         images: [
@@ -629,7 +645,7 @@
       },
       {
         title: "Much Ado About Nothing", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
-        year: 2014, director: "Patrick Kelly", photographer: null,
+        year: 2014, director: "Patrick Kelly", photographer: "Linda Blase",
         slug: "much-ado-about-nothing",
         thumb: "images/much-ado-about-nothing/sd-097-much-ado-thumb.jpg",
         images: [
@@ -640,7 +656,7 @@
       },
       {
         title: "Tartuffe", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
-        year: 2014, director: "Raphael Parry", photographer: null,
+        year: 2014, director: "Raphael Parry", photographer: "Linda Blase",
         slug: "tartuffe",
         thumb: "images/tartuffe/sd-057-tartuffe-thumb.jpg",
         images: [
@@ -651,7 +667,7 @@
       },
       {
         title: "King Lear", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
-        year: 2015, director: "Raphael Parry", photographer: null,
+        year: 2015, director: "Raphael Parry", photographer: "Linda Blase",
         slug: "king-lear",
         thumb: "images/king-lear/lear-sd-336-thumb.jpg",
         images: [
@@ -661,7 +677,7 @@
       },
       {
         title: "She Stoops to Conquer", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
-        year: 2016, director: "Mason York", photographer: null,
+        year: 2016, director: "Mason York", photographer: "Linda Blase",
         slug: "she-stoops-to-conquer",
         thumb: "images/she-stoops-to-conquer/she-stoops-10.jpg",
         images: [
@@ -674,7 +690,7 @@
       },
       {
         title: "Br'er Cotton", company: "Kitchen Dog Theater", filter: "kitchen-dog",
-        year: 2017, director: "Rhonde Boutte", photographer: null,
+        year: 2017, director: "Rhonde Boutte", photographer: "Matt Mrozek",
         slug: "brer-cotton",
         thumb: "images/brer-cotton/cotton-archive-51-thumb.jpg",
         images: [
@@ -686,7 +702,7 @@
       },
       {
         title: "Beauty Queen of Leenane", company: "Kitchen Dog Theater", filter: "kitchen-dog",
-        year: 2012, director: "Cameron Cobb", photographer: null,
+        year: 2012, director: "Cameron Cobb", photographer: "Matt Mrozek",
         slug: "the-beauty-queen-of-leenane",
         thumb: "images/the-beauty-queen-of-leenane/beauty-queen-mm1.jpg",
         images: [
@@ -697,7 +713,7 @@
       },
       {
         title: "Se Llama Cristina", company: "Kitchen Dog Theater", filter: "kitchen-dog",
-        year: 2013, director: "Christie Vela", photographer: null,
+        year: 2013, director: "Christie Vela", photographer: "Matt Mrozek",
         slug: "se-llama-cristina",
         thumb: "images/se-llama-cristina/se-llama-production-03-thumb.jpg",
         images: [
@@ -707,7 +723,7 @@
       },
       {
         title: "The Dumb Waiter", company: "Kitchen Dog Theater", filter: "kitchen-dog",
-        year: 2015, director: "Tim Johnson", photographer: null,
+        year: 2015, director: "Tim Johnson", photographer: "Matt Mrozek",
         slug: "dumb-waiter",
         thumb: "images/dumb-waiter/dumb-waiter-0041-thumb.jpg",
         images: [
@@ -718,7 +734,7 @@
       },
       {
         title: "Another Murder, Another Show!", company: "Pegasus Theatre", filter: "pegasus",
-        year: 2015, director: "Michael Serrecchia", photographer: null,
+        year: 2015, director: "Michael Serrecchia", photographer: "Alan Abair",
         slug: "another-murder-another-show",
         thumb: "images/another-murder-another-show/another-murder-01-thumb.jpg",
         images: [
@@ -730,7 +746,7 @@
       },
       {
         title: "It\u2019s Beginning to Look a Lot Like Murder", company: "Pegasus Theatre", filter: "pegasus",
-        year: 2016, director: "Michael Serrecchia", photographer: null,
+        year: 2016, director: "Michael Serrecchia", photographer: "Alan Abair",
         slug: "its-beginning-to-look-a-lot-like-murder",
         thumb: "images/its-beginning-to-look-a-lot-like-murder/beginning-to-look-like-murder-02-thumb.jpg",
         images: [
@@ -741,7 +757,7 @@
       },
       {
         title: "Death on Delivery", company: "Pegasus Theatre", filter: "pegasus",
-        year: 2017, director: "Michael Serrecchia", photographer: null,
+        year: 2017, director: "Michael Serrecchia", photographer: "Alan Abair",
         slug: "death-on-delivery",
         thumb: "images/death-on-delivery/death-on-delivery-01-thumb.jpg",
         images: [
@@ -754,7 +770,7 @@
       },
       {
         title: "Death is a Bad Habit", company: "Pegasus Theatre", filter: "pegasus",
-        year: 2016, director: "Michael Serrecchia", photographer: null,
+        year: 2016, director: "Michael Serrecchia", photographer: "Alan Abair",
         slug: "death-is-a-bad-habit",
         thumb: "images/death-is-a-bad-habit/death-01-thumb.jpg",
         images: [
@@ -766,7 +782,7 @@
       },
       {
         title: "Love's Labour's Lost", company: "Austin Shakespeare", filter: "austin-shakespeare",
-        year: 2011, director: "Robert Faires", photographer: null,
+        year: 2011, director: "Robert Faires", photographer: "Kimberley Mead",
         slug: "loves-labors-lost",
         thumb: "images/loves-labors-lost/loves-labour-ladies-swimsuits.jpg",
         images: [
@@ -777,7 +793,7 @@
       },
       {
         title: "Man and Superman", company: "Austin Shakespeare", filter: "austin-shakespeare",
-        year: 2011, director: "Ann Ciccolella", photographer: null,
+        year: 2011, director: "Ann Ciccolella", photographer: "Kimberley Mead",
         slug: "man-and-superman",
         thumb: "images/man-and-superman/man-and-superman-ann.jpg",
         thumbPosition: "top",
@@ -790,7 +806,7 @@
       },
       {
         title: "Mary Stuart", company: "Austin Shakespeare", filter: "austin-shakespeare",
-        year: 2010, director: "Ann Ciccolella", photographer: null,
+        year: 2010, director: "Ann Ciccolella", photographer: "Kimberley Mead",
         slug: "mary-stuart",
         thumb: "images/mary-stuart/mary-stuart-white.jpg",
         images: [
@@ -802,7 +818,7 @@
       },
       {
         title: "A Midsummer Night\u2019s Dream", company: "UT Austin", filter: "ut-austin",
-        year: 2008, director: "Paul Mullins", photographer: null,
+        year: 2008, director: "Paul Mullins", photographer: "Mark Rutkowski and David B Jurstrom",
         slug: "midsummer-ut-austin",
         thumb: "images/midsummer-ut-austin/ut-midsummer-604-thumb.jpg",
         images: [
@@ -821,7 +837,7 @@
       },
       {
         title: "A Midsummer Night\u2019s Dream", company: "Austin Shakespeare", filter: "austin-shakespeare",
-        year: 2010, director: "Ann Ciccolella", photographer: null,
+        year: 2010, director: "Ann Ciccolella", photographer: "Kimberley Mead",
         slug: "midsummer-austin-shakespeare",
         thumb: "images/midsummer-austin-shakespeare/asm-midsummer-mechanicals.jpg",
         images: [
@@ -833,7 +849,7 @@
       },
       {
         title: "Assassins", company: "UT Austin", filter: "ut-austin",
-        year: 2008, director: "Rod Caspers", photographer: null,
+        year: 2008, director: "Rod Caspers", photographer: "Mark Rutkowski",
         slug: "assassins",
         thumb: "images/assassins/assassins-mckinley.jpg",
         images: [
@@ -846,7 +862,7 @@
       },
       {
         title: "Aria Redux", company: "UT Austin", filter: "ut-austin",
-        year: 2007, director: "Harrison McEldowny", photographer: null,
+        year: 2007, director: "Harrison McEldowny", photographer: "Autumn Casey and Mark Rutkowski",
         slug: "aria-redux",
         thumb: "images/aria-redux/aria-01-thumb.jpg",
         images: [
@@ -868,11 +884,15 @@
       const filtered = filter === 'all' ? shows : shows.filter(s => s.filter === filter);
       grid.innerHTML = '';
       filtered.forEach(show => {
-        const card = document.createElement('div');
+        const card = document.createElement('button');
+        card.type = 'button';
         card.className = 'show-card';
+        card.setAttribute('aria-label',
+          `${show.title}, ${show.company} — open gallery of ${show.images.length} photos`);
         const img = document.createElement('img');
         img.src = show.thumb;
-        img.alt = show.title;
+        img.alt = '';                      // decorative; label is on the button
+        img.setAttribute('aria-hidden', 'true');
         img.loading = 'lazy';
         if (show.thumbPosition) img.style.objectPosition = show.thumbPosition;
         img.onload = () => img.classList.add('loaded');
@@ -885,7 +905,10 @@
         `;
         card.appendChild(img);
         card.appendChild(overlay);
-        card.addEventListener('click', () => openLightbox(show));
+        card.addEventListener('click', () => {
+          lightboxOpener = card;
+          openLightbox(show);
+        });
         grid.appendChild(card);
       });
     }
@@ -920,15 +943,41 @@
         ? `<p class="photo-credit">Production photos by ${show.photographer}</p>`
         : '';
       lightboxContent.innerHTML = `
-        <h2>${show.title}</h2>
+        <h2 id="lightbox-title">${show.title}</h2>
         <div class="company-tag">${show.company}</div>
         ${creditsLine}
         <div class="lightbox-gallery">${imagesHtml}</div>
         ${photoLine}
       `;
       lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      // Focus the close button so keyboard users land somewhere sensible.
+      // setTimeout lets the lightbox finish becoming visible first.
+      setTimeout(() => document.getElementById('lightboxClose').focus(), 0);
     }
+
+    // Track the element that opened the lightbox so we can return focus on close.
+    let lightboxOpener = null;
+
+    // Focus trap: keep Tab/Shift+Tab cycling within the open lightbox.
+    function trapFocus(e) {
+      if (!lightbox.classList.contains('open') || e.key !== 'Tab') return;
+      const focusables = lightbox.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+    document.addEventListener('keydown', trapFocus);
 
     document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
@@ -936,7 +985,13 @@
 
     function closeLightbox() {
       lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      // Return focus to whatever opened the lightbox.
+      if (lightboxOpener && typeof lightboxOpener.focus === 'function') {
+        lightboxOpener.focus();
+      }
+      lightboxOpener = null;
     }
 
     // ── Nav ────────────────────────────────────────────

@@ -159,6 +159,51 @@
       .cv-entry .date, .cv-simple .date { margin-left: 0; width: 100%; font-size: 0.78rem; }
       .cv-page { padding: 5rem 1.2rem 3rem; }
     }
+
+    /* ── Print ─────────────────────────────────────────── */
+    @media print {
+      @page { margin: 0.6in 0.75in; }
+      html, body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 10.5pt;
+        line-height: 1.4;
+      }
+      .back-link { display: none !important; }
+      .cv-page {
+        max-width: none;
+        padding: 0;
+        margin: 0;
+      }
+      .cv-header { margin-bottom: 1.5rem; }
+      .cv-header h1 { font-size: 22pt; color: #000; }
+      .cv-header .subtitle,
+      .cv-header .subtitle a {
+        color: #333 !important;
+        border-bottom: none;
+      }
+      .cv-section-title {
+        color: #000 !important;
+        border-bottom-color: #000 !important;
+        font-size: 8.5pt;
+        margin-top: 1.2rem;
+        margin-bottom: 0.6rem;
+        page-break-after: avoid;
+      }
+      .cv-sub-title {
+        color: #222 !important;
+        font-size: 10.5pt;
+        margin-top: 0.9rem;
+        margin-bottom: 0.3rem;
+        page-break-after: avoid;
+      }
+      .cv-entry, .cv-simple { font-size: 9.5pt; page-break-inside: avoid; }
+      .cv-entry .detail, .cv-simple .detail,
+      .cv-edu .school { color: #222 !important; }
+      .cv-entry .date, .cv-simple .date,
+      .cv-edu .thesis, .cv-indent { color: #444 !important; }
+      a { color: #000 !important; text-decoration: none; }
+    }
   </style>
 </head>
 <body>
@@ -195,7 +240,7 @@
   <div class="cv-entry"><span class="title">Beatrice + Benedict</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Apr 2025</span></div>
   <div class="cv-entry"><span class="title">Cavalleria Rusticana</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Apr 2025</span></div>
   <div class="cv-entry"><span class="title">Cendrillon</span><span class="detail">Opera Orlando, James Marvel</span><span class="date">Feb 2025</span></div>
-  <div class="cv-entry"><span class="title">MacBeth</span><span class="detail">Opera Orlando, Matt Haney</span><span class="date">Oct 2024</span></div>
+  <div class="cv-entry"><span class="title">Macbeth</span><span class="detail">Opera Orlando, Matt Haney</span><span class="date">Oct 2024</span></div>
   <div class="cv-entry"><span class="title">Lucia di Lammermoor</span><span class="detail">Opera Orlando, Grant Preisser</span><span class="date">Apr 2024</span></div>
   <div class="cv-entry"><span class="title">Tosca</span><span class="detail">Opera Orlando, Josh Shaw</span><span class="date">Oct 2023</span></div>
   <div class="cv-entry"><span class="title">Alcina</span><span class="detail">University of Michigan, Grant Preisser</span><span class="date">Apr 2019</span></div>
