@@ -25,6 +25,38 @@
   <meta name="twitter:image" content="https://jenjmadison.com/images/og-preview.jpg">
   <meta name="twitter:image:alt" content="Jen J Madison — Costume Design. Promotional card over a scene from Opera Orlando's Lucia di Lammermoor.">
   <meta name="description" content="Portfolio of costume designer Jen J Madison. Opera, classical theatre, and contemporary work.">
+  <!-- ── Structured data (schema.org / JSON-LD) ─────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jen J. Madison",
+    "jobTitle": "Costume Designer",
+    "url": "https://jenjmadison.com/",
+    "image": "https://jenjmadison.com/images/og-preview.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/jen-j-madison-50338211/"
+    ],
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "The University of Texas at Austin",
+        "sameAs": "https://en.wikipedia.org/wiki/University_of_Texas_at_Austin"
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Eastern Oregon University",
+        "sameAs": "https://en.wikipedia.org/wiki/Eastern_Oregon_University"
+      }
+    ],
+    "knowsAbout": [
+      "Costume Design",
+      "Opera",
+      "Theatre",
+      "Theatrical Design"
+    ]
+  }
+  </script>
   <title>Jen J Madison – Costume Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -219,7 +251,17 @@
     .lightbox-content h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; }
     .lightbox-content .company-tag {
       font-size: 0.8rem; text-transform: uppercase;
-      letter-spacing: 0.15em; color: #b8a99a; margin-bottom: 2rem;
+      letter-spacing: 0.15em; color: #b8a99a; margin-bottom: 0.4rem;
+    }
+    .lightbox-content .credits {
+      font-size: 0.8rem; color: #999;
+      font-style: italic; margin-bottom: 2rem;
+    }
+    .lightbox-content .credits .sep { color: #555; margin: 0 0.5rem; }
+    .lightbox-content .photo-credit {
+      font-size: 0.75rem; color: #777;
+      font-style: italic; margin: 1.5rem 0 0;
+      letter-spacing: 0.02em;
     }
     .lightbox-gallery {
       display: grid; grid-template-columns: 1fr; gap: 0.75rem;
@@ -516,6 +558,7 @@
     const shows = [
       {
         title: "Lucia di Lammermoor", company: "Opera Orlando", filter: "opera-orlando",
+        year: 2024, director: "Grant Preisser", photographer: null,
         slug: "lucia-di-lammermoor",
         thumb: "images/lucia-di-lammermoor/lucia-03521-thumb.jpg",
         images: [
@@ -539,6 +582,7 @@
       },
       {
         title: "Cendrillon", company: "Opera Orlando", filter: "opera-orlando",
+        year: 2025, director: "James Marvel", photographer: null,
         slug: "cendrillon",
         thumb: "images/cendrillon/cendrillon-04-thumb.jpg",
         images: [
@@ -549,6 +593,7 @@
       },
       {
         title: "Macbeth", company: "Opera Orlando", filter: "opera-orlando",
+        year: 2024, director: "Matt Haney", photographer: null,
         slug: "macbeth",
         thumb: "images/macbeth/macbeth-04-thumb.jpg",
         images: [
@@ -559,6 +604,7 @@
       },
       {
         title: "Tosca", company: "Opera Orlando", filter: "opera-orlando",
+        year: 2023, director: "Josh Shaw", photographer: null,
         slug: "tosca",
         thumb: "images/tosca/tosca-0196-thumb.jpg",
         images: [
@@ -570,6 +616,7 @@
       },
       {
         title: "The Tempest", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        year: 2016, director: "Rene Moreno", photographer: null,
         slug: "the-tempest",
         thumb: "images/the-tempest/sd-247-the-tempest.jpg",
         images: [
@@ -582,6 +629,7 @@
       },
       {
         title: "Much Ado About Nothing", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        year: 2014, director: "Patrick Kelly", photographer: null,
         slug: "much-ado-about-nothing",
         thumb: "images/much-ado-about-nothing/sd-097-much-ado-thumb.jpg",
         images: [
@@ -592,6 +640,7 @@
       },
       {
         title: "Tartuffe", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        year: 2014, director: "Raphael Parry", photographer: null,
         slug: "tartuffe",
         thumb: "images/tartuffe/sd-057-tartuffe-thumb.jpg",
         images: [
@@ -602,6 +651,7 @@
       },
       {
         title: "King Lear", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        year: 2015, director: "Raphael Parry", photographer: null,
         slug: "king-lear",
         thumb: "images/king-lear/lear-sd-336-thumb.jpg",
         images: [
@@ -611,6 +661,7 @@
       },
       {
         title: "She Stoops to Conquer", company: "Shakespeare Dallas", filter: "shakespeare-dallas",
+        year: 2016, director: "Mason York", photographer: null,
         slug: "she-stoops-to-conquer",
         thumb: "images/she-stoops-to-conquer/she-stoops-10.jpg",
         images: [
@@ -623,6 +674,7 @@
       },
       {
         title: "Br'er Cotton", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        year: 2017, director: "Rhonde Boutte", photographer: null,
         slug: "brer-cotton",
         thumb: "images/brer-cotton/cotton-archive-51-thumb.jpg",
         images: [
@@ -634,6 +686,7 @@
       },
       {
         title: "Beauty Queen of Leenane", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        year: 2012, director: "Cameron Cobb", photographer: null,
         slug: "the-beauty-queen-of-leenane",
         thumb: "images/the-beauty-queen-of-leenane/beauty-queen-mm1.jpg",
         images: [
@@ -644,6 +697,7 @@
       },
       {
         title: "Se Llama Cristina", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        year: 2013, director: "Christie Vela", photographer: null,
         slug: "se-llama-cristina",
         thumb: "images/se-llama-cristina/se-llama-production-03-thumb.jpg",
         images: [
@@ -653,6 +707,7 @@
       },
       {
         title: "The Dumb Waiter", company: "Kitchen Dog Theater", filter: "kitchen-dog",
+        year: 2015, director: "Tim Johnson", photographer: null,
         slug: "dumb-waiter",
         thumb: "images/dumb-waiter/dumb-waiter-0041-thumb.jpg",
         images: [
@@ -663,6 +718,7 @@
       },
       {
         title: "Another Murder, Another Show!", company: "Pegasus Theatre", filter: "pegasus",
+        year: 2015, director: "Michael Serrecchia", photographer: null,
         slug: "another-murder-another-show",
         thumb: "images/another-murder-another-show/another-murder-01-thumb.jpg",
         images: [
@@ -674,6 +730,7 @@
       },
       {
         title: "It\u2019s Beginning to Look a Lot Like Murder", company: "Pegasus Theatre", filter: "pegasus",
+        year: 2016, director: "Michael Serrecchia", photographer: null,
         slug: "its-beginning-to-look-a-lot-like-murder",
         thumb: "images/its-beginning-to-look-a-lot-like-murder/beginning-to-look-like-murder-02-thumb.jpg",
         images: [
@@ -684,6 +741,7 @@
       },
       {
         title: "Death on Delivery", company: "Pegasus Theatre", filter: "pegasus",
+        year: 2017, director: "Michael Serrecchia", photographer: null,
         slug: "death-on-delivery",
         thumb: "images/death-on-delivery/death-on-delivery-01-thumb.jpg",
         images: [
@@ -696,6 +754,7 @@
       },
       {
         title: "Death is a Bad Habit", company: "Pegasus Theatre", filter: "pegasus",
+        year: 2016, director: "Michael Serrecchia", photographer: null,
         slug: "death-is-a-bad-habit",
         thumb: "images/death-is-a-bad-habit/death-01-thumb.jpg",
         images: [
@@ -707,6 +766,7 @@
       },
       {
         title: "Love's Labour's Lost", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        year: 2011, director: "Robert Faires", photographer: null,
         slug: "loves-labors-lost",
         thumb: "images/loves-labors-lost/loves-labour-ladies-swimsuits.jpg",
         images: [
@@ -717,6 +777,7 @@
       },
       {
         title: "Man and Superman", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        year: 2011, director: "Ann Ciccolella", photographer: null,
         slug: "man-and-superman",
         thumb: "images/man-and-superman/man-and-superman-ann.jpg",
         thumbPosition: "top",
@@ -729,6 +790,7 @@
       },
       {
         title: "Mary Stuart", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        year: 2010, director: "Ann Ciccolella", photographer: null,
         slug: "mary-stuart",
         thumb: "images/mary-stuart/mary-stuart-white.jpg",
         images: [
@@ -740,6 +802,7 @@
       },
       {
         title: "A Midsummer Night\u2019s Dream", company: "UT Austin", filter: "ut-austin",
+        year: 2008, director: "Paul Mullins", photographer: null,
         slug: "midsummer-ut-austin",
         thumb: "images/midsummer-ut-austin/ut-midsummer-604-thumb.jpg",
         images: [
@@ -758,6 +821,7 @@
       },
       {
         title: "A Midsummer Night\u2019s Dream", company: "Austin Shakespeare", filter: "austin-shakespeare",
+        year: 2010, director: "Ann Ciccolella", photographer: null,
         slug: "midsummer-austin-shakespeare",
         thumb: "images/midsummer-austin-shakespeare/asm-midsummer-mechanicals.jpg",
         images: [
@@ -769,6 +833,7 @@
       },
       {
         title: "Assassins", company: "UT Austin", filter: "ut-austin",
+        year: 2008, director: "Rod Caspers", photographer: null,
         slug: "assassins",
         thumb: "images/assassins/assassins-mckinley.jpg",
         images: [
@@ -781,6 +846,7 @@
       },
       {
         title: "Aria Redux", company: "UT Austin", filter: "ut-austin",
+        year: 2007, director: "Harrison McEldowny", photographer: null,
         slug: "aria-redux",
         thumb: "images/aria-redux/aria-01-thumb.jpg",
         images: [
@@ -842,10 +908,23 @@
       const imagesHtml = show.images.map(f =>
         `<img src="${imgDir}${f}" alt="${show.title}" loading="lazy">`
       ).join('');
+      // Build "Directed by X · YYYY" line if we have either piece.
+      const creditParts = [];
+      if (show.director) creditParts.push(`Directed by ${show.director}`);
+      if (show.year)     creditParts.push(show.year);
+      const creditsLine = creditParts.length
+        ? `<div class="credits">${creditParts.join('<span class="sep">·</span>')}</div>`
+        : '';
+      // Photographer caption below the gallery.
+      const photoLine = show.photographer
+        ? `<p class="photo-credit">Production photos by ${show.photographer}</p>`
+        : '';
       lightboxContent.innerHTML = `
         <h2>${show.title}</h2>
         <div class="company-tag">${show.company}</div>
+        ${creditsLine}
         <div class="lightbox-gallery">${imagesHtml}</div>
+        ${photoLine}
       `;
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
