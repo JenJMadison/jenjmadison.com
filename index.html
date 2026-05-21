@@ -184,7 +184,16 @@
     }
     .scroll-indicator {
       position: absolute; bottom: 2rem;
-      animation: bob 2s ease-in-out infinite; color: #555; font-size: 1.5rem;
+      animation: bob 2s ease-in-out infinite;
+      color: #555; font-size: 1.5rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.5rem; height: 2.5rem;
+      border-radius: 50%;
+      transition: color 0.2s, background 0.2s;
+    }
+    .scroll-indicator:hover { color: #e8e4e0; background: rgba(184,169,154,0.08); }
+    .scroll-indicator:focus-visible {
+      outline: 2px solid #b8a99a; outline-offset: 4px;
     }
     @keyframes bob { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(8px); } }
 
@@ -444,7 +453,7 @@
     </div>
     <h1>Jen J Madison</h1>
     <p class="subtitle">Costume Designer</p>
-    <div class="scroll-indicator">&#8595;</div>
+    <a class="scroll-indicator" href="#portfolio" aria-label="Scroll to portfolio">&#8595;</a>
   </section>
 
   <!-- ── Portfolio ───────────────────────────────────── -->
@@ -519,7 +528,7 @@
     <div class="cv-education">
       <h3>Education</h3>
       <p>MFA Theatrical Design &mdash; The University of Texas at Austin</p>
-      <p style="margin-top:1rem;"><a href="cv.html" style="color:#b8a99a; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; border-bottom:1px solid rgba(184,169,154,0.3); padding-bottom:2px;">View Full CV &rarr;</a></p>
+      <p style="margin-top:1rem;"><a href="cv.html" style="color:#b8a99a; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; border-bottom:1px solid rgba(184,169,154,0.3); padding-bottom:2px;">View Full CV &rarr;</a> &nbsp; <a href="JenJMadison-CV.pdf" download style="color:#b8a99a; font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; border-bottom:1px solid rgba(184,169,154,0.3); padding-bottom:2px;">Download PDF</a></p>
     </div>
   </section>
 
