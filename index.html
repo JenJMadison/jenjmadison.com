@@ -133,9 +133,13 @@
 
     .carousel-image {
       position: absolute; inset: 0;
-      background-size: cover; background-position: center;
       opacity: 0;
       animation: carouselFade 20s infinite;
+    }
+    .carousel-image img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
     }
 
     .carousel-image:nth-child(1) { animation-delay: 2s; }
@@ -271,14 +275,10 @@
       font-style: italic; margin-bottom: 2rem;
     }
     .lightbox-content .credits .sep { color: #555; margin: 0 0.5rem; }
-    .lightbox-content .photo-credit {
-      font-size: 0.75rem; color: #777;
-      font-style: italic; margin: 1.5rem 0 0;
-      letter-spacing: 0.02em;
-    }
     .lightbox-gallery {
       display: grid; grid-template-columns: 1fr; gap: 0.75rem;
     }
+    .lightbox-gallery picture { display: block; }
     .lightbox-gallery img {
       width: 100%; border-radius: 2px;
       background: #111;
@@ -410,11 +410,23 @@
 
   <!-- ── Hero with Carousel Background ─────────────── -->
   <section class="hero" id="home">
-    <div class="hero-carousel">
-      <div class="carousel-image" style="background-image: url('images/lucia-di-lammermoor/lucia-03329.jpg');"></div>
-      <div class="carousel-image" style="background-image: url('images/midsummer-ut-austin/ut-midsummer-381.jpg');"></div>
-      <div class="carousel-image" style="background-image: url('images/loves-labors-lost/loves-labour-ladies-swimsuits.jpg');"></div>
-      <div class="carousel-image" style="background-image: url('images/much-ado-about-nothing/sd-097-much-ado.jpg');"></div>
+    <div class="hero-carousel" aria-hidden="true">
+      <picture class="carousel-image">
+        <source type="image/webp" srcset="images/lucia-di-lammermoor/lucia-03329.webp">
+        <img src="images/lucia-di-lammermoor/lucia-03329.jpg" alt="" fetchpriority="high">
+      </picture>
+      <picture class="carousel-image">
+        <source type="image/webp" srcset="images/midsummer-ut-austin/ut-midsummer-381.webp">
+        <img src="images/midsummer-ut-austin/ut-midsummer-381.jpg" alt="">
+      </picture>
+      <picture class="carousel-image">
+        <source type="image/webp" srcset="images/loves-labors-lost/loves-labour-ladies-swimsuits.webp">
+        <img src="images/loves-labors-lost/loves-labour-ladies-swimsuits.jpg" alt="">
+      </picture>
+      <picture class="carousel-image">
+        <source type="image/webp" srcset="images/much-ado-about-nothing/sd-097-much-ado.webp">
+        <img src="images/much-ado-about-nothing/sd-097-much-ado.jpg" alt="">
+      </picture>
     </div>
     <h1>Jen J Madison</h1>
     <p class="subtitle">Costume Designer</p>
@@ -889,6 +901,13 @@
         card.className = 'show-card';
         card.setAttribute('aria-label',
           `${show.title}, ${show.company} — open gallery of ${show.images.length} photos`);
+        // Wrap thumbnail in <picture> so modern browsers get WebP.
+        const picture = document.createElement('picture');
+        const webpBase = show.thumb.replace(/\.jpg$/, '');
+        const source = document.createElement('source');
+        source.type = 'image/webp';
+        source.srcset = `${webpBase}-sm.webp 800w, ${webpBase}.webp 1600w`;
+        source.sizes = '(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 25vw';
         const img = document.createElement('img');
         img.src = show.thumb;
         img.alt = '';                      // decorative; label is on the button
@@ -896,6 +915,8 @@
         img.loading = 'lazy';
         if (show.thumbPosition) img.style.objectPosition = show.thumbPosition;
         img.onload = () => img.classList.add('loaded');
+        picture.appendChild(source);
+        picture.appendChild(img);
         const overlay = document.createElement('div');
         overlay.className = 'overlay';
         overlay.innerHTML = `
@@ -903,7 +924,7 @@
             <span class="company">${show.company}</span>
             <span class="count">${show.images.length} photos</span>
         `;
-        card.appendChild(img);
+        card.appendChild(picture);
         card.appendChild(overlay);
         card.addEventListener('click', () => {
           lightboxOpener = card;
@@ -928,26 +949,27 @@
 
     function openLightbox(show) {
       const imgDir = `images/${show.slug}/`;
-      const imagesHtml = show.images.map(f =>
-        `<img src="${imgDir}${f}" alt="${show.title}" loading="lazy">`
-      ).join('');
-      // Build "Directed by X · YYYY" line if we have either piece.
+      // Each gallery image: <picture> with WebP source + JPG fallback.
+      const imagesHtml = show.images.map(f => {
+        const base = f.replace(/\.jpg$/, '');
+        return `<picture>
+          <source type="image/webp" srcset="${imgDir}${base}.webp">
+          <img src="${imgDir}${f}" alt="${show.title}" loading="lazy">
+        </picture>`;
+      }).join('');
+      // Build "Directed by X · YYYY · Photos by Z" line — show whichever pieces we have.
       const creditParts = [];
-      if (show.director) creditParts.push(`Directed by ${show.director}`);
-      if (show.year)     creditParts.push(show.year);
+      if (show.director)     creditParts.push(`Directed by ${show.director}`);
+      if (show.year)         creditParts.push(show.year);
+      if (show.photographer) creditParts.push(`Photos by ${show.photographer}`);
       const creditsLine = creditParts.length
         ? `<div class="credits">${creditParts.join('<span class="sep">·</span>')}</div>`
-        : '';
-      // Photographer caption below the gallery.
-      const photoLine = show.photographer
-        ? `<p class="photo-credit">Production photos by ${show.photographer}</p>`
         : '';
       lightboxContent.innerHTML = `
         <h2 id="lightbox-title">${show.title}</h2>
         <div class="company-tag">${show.company}</div>
         ${creditsLine}
         <div class="lightbox-gallery">${imagesHtml}</div>
-        ${photoLine}
       `;
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
