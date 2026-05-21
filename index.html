@@ -364,22 +364,19 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .press-quote .press-source a:hover { color: #fff; border-color: #fff; }
-    .press-photos {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-      margin-bottom: 2.5rem;
+    .press-quote.press-featured .press-feature-image {
+      margin: -1.75rem -1.75rem 1.25rem -2.25rem;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
     }
-    @media (max-width: 600px) { .press-photos { grid-template-columns: 1fr; } }
-    .press-feature {
-      border-radius: 4px; overflow: hidden;
+    .press-quote.press-featured .press-feature-image img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      opacity: 0.92;
+      transition: opacity 0.25s;
     }
-    .press-feature img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      border-radius: 4px; opacity: 0.85;
-    }
-    .press-feature figcaption {
-      margin-top: 0.6rem;
-      font-size: 0.7rem; color: #777; font-style: italic;
-      text-align: center;
+    .press-quote.press-featured:hover .press-feature-image img {
+      opacity: 1;
     }
 
     /* ── Contact ───────────────────────────────────────── */
@@ -551,16 +548,6 @@
       <h2>Press</h2>
       <div class="rule"></div>
     </div>
-    <div class="press-photos">
-      <figure class="press-feature">
-        <img src="images/press-photos/tosca-orlando-weekly.jpg" alt="Behind the scenes in the costume shop for Opera Orlando's Tosca">
-        <figcaption>In the costume shop for Tosca &mdash; Orlando Weekly</figcaption>
-      </figure>
-      <figure class="press-feature">
-        <img src="images/press-photos/orlando-magazine-2025.jpg" alt="Jen Madison with period costume and armor at Opera Orlando">
-        <figcaption>Jen Madison &mdash; Orlando Magazine, Sep 2025</figcaption>
-      </figure>
-    </div>
     <div class="press-grid">
       <a class="press-quote" href="https://www.orlandosentinel.com/2025/02/08/cendrillon-review-opera-orlando-cinderella/" target="_blank" rel="noopener">
         <div class="press-show">Cendrillon &middot; Opera Orlando</div>
@@ -572,12 +559,24 @@
         <blockquote>Succeeds on every level. It&rsquo;s beautiful to look at.</blockquote>
         <div class="press-source">Matthew J. Palm &mdash; Orlando Sentinel, Apr 2024</div>
       </a>
-      <a class="press-quote" href="https://www.orlandoweekly.com/arts/opera-orlandos-tosca-takes-shape-with-plenty-of-midnight-oil-burned-before-the-final-reveal-this-weekend-35356790" target="_blank" rel="noopener">
+      <a class="press-quote press-featured" href="https://www.orlandoweekly.com/arts/opera-orlandos-tosca-takes-shape-with-plenty-of-midnight-oil-burned-before-the-final-reveal-this-weekend-35356790" target="_blank" rel="noopener">
+        <div class="press-feature-image">
+          <picture>
+            <source type="image/webp" srcset="images/press-photos/tosca-orlando-weekly.webp">
+            <img src="images/press-photos/tosca-orlando-weekly.jpg" alt="Behind the scenes in the costume shop for Opera Orlando&rsquo;s Tosca" loading="lazy">
+          </picture>
+        </div>
         <div class="press-show">Tosca &middot; Opera Orlando</div>
         <blockquote>Combining rented pieces with new builds to create the 70-odd looks required.</blockquote>
         <div class="press-source">Orlando Weekly, Oct 2023</div>
       </a>
-      <a class="press-quote" href="https://www.orlandomagazine.com/peek-behind-the-curtain-at-orlandos-art-scene-jean-madison/" target="_blank" rel="noopener">
+      <a class="press-quote press-featured" href="https://www.orlandomagazine.com/peek-behind-the-curtain-at-orlandos-art-scene-jean-madison/" target="_blank" rel="noopener">
+        <div class="press-feature-image">
+          <picture>
+            <source type="image/webp" srcset="images/press-photos/orlando-magazine-2025.webp">
+            <img src="images/press-photos/orlando-magazine-2025.jpg" alt="Jen Madison with period costume and armor at Opera Orlando" loading="lazy">
+          </picture>
+        </div>
         <div class="press-show">Lucia di Lammermoor &middot; Opera Orlando</div>
         <blockquote>We spent almost a week just distressing and painting to get them looking like they had been worn on the edge of civilization for years.</blockquote>
         <div class="press-source">Jennifer McKee &mdash; Orlando Magazine, Sep 2025</div>
