@@ -289,7 +289,8 @@
     }
     .lightbox-gallery picture { display: block; }
     .lightbox-gallery img {
-      width: 100%; border-radius: 2px;
+      width: 100%; height: auto;
+      border-radius: 2px;
       background: #111;
     }
     /* Two-column for landscape-heavy galleries */
@@ -1024,14 +1025,32 @@
       }
       history.pushState({filter}, '', url);
     });
-    // Re-apply on back/forward.
-    window.addEventListener('popstate', () => applyFilter(readFilterFromURL()));
+    // Re-apply both filter and lightbox state on back/forward navigation.
+    window.addEventListener('popstate', () => {
+      const params = new URLSearchParams(location.search);
+      const slug = params.get('lightbox');
+      const isOpen = lightbox.classList.contains('open');
+      if (slug) {
+        // URL says a lightbox should be open. Open or swap to it.
+        const show = shows.find(s => s.slug === slug);
+        if (show && (!isOpen || lightboxCurrentSlug !== slug)) {
+          openLightbox(show, {silent: true});
+        }
+      } else if (isOpen) {
+        // URL has no lightbox but one is open — back-navigated past it.
+        closeLightbox({silent: true});
+      }
+      applyFilter(readFilterFromURL());
+    });
 
     // ── Lightbox ───────────────────────────────────────
     const lightbox = document.getElementById('lightbox');
     const lightboxContent = document.getElementById('lightboxContent');
 
-    function openLightbox(show) {
+    // Track which show is currently open so popstate can decide whether to swap content.
+    let lightboxCurrentSlug = null;
+
+    function openLightbox(show, opts = {}) {
       const imgDir = `images/${show.slug}/`;
       // Each gallery image: <picture> with WebP source + JPG fallback.
       const imagesHtml = show.images.map(f => {
@@ -1060,9 +1079,18 @@
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      lightboxCurrentSlug = show.slug;
       // Focus the close button so keyboard users land somewhere sensible.
       // setTimeout lets the lightbox finish becoming visible first.
       setTimeout(() => document.getElementById('lightboxClose').focus(), 0);
+      // Push a history entry so the browser back button closes the lightbox.
+      // {silent: true} skips this — used when we're already responding to a
+      // popstate event or applying state from the URL on initial load.
+      if (!opts.silent) {
+        const url = new URL(location.href);
+        url.searchParams.set('lightbox', show.slug);
+        history.pushState({...history.state, lightbox: show.slug}, '', url);
+      }
     }
 
     // Track the element that opened the lightbox so we can return focus on close.
@@ -1087,19 +1115,46 @@
     }
     document.addEventListener('keydown', trapFocus);
 
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+    document.getElementById('lightboxClose').addEventListener('click', () => closeLightbox());
     lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-    function closeLightbox() {
+    // If the page loaded with ?lightbox=<slug>, open that show's gallery
+    // silently (the URL is already correct so we don't push a new state).
+    {
+      const initialSlug = new URLSearchParams(location.search).get('lightbox');
+      if (initialSlug) {
+        const show = shows.find(s => s.slug === initialSlug);
+        if (show) openLightbox(show, {silent: true});
+      }
+    }
+
+    function closeLightbox(opts = {}) {
+      if (!lightbox.classList.contains('open')) return;   // idempotent
       lightbox.classList.remove('open');
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      lightboxCurrentSlug = null;
       // Return focus to whatever opened the lightbox.
       if (lightboxOpener && typeof lightboxOpener.focus === 'function') {
         lightboxOpener.focus();
       }
       lightboxOpener = null;
+      // When the user closes via X / Escape / backdrop, pop the history entry
+      // we pushed on open so the URL stays in sync. The resulting popstate
+      // event will re-enter closeLightbox with {silent: true} but the early-
+      // return above makes that a no-op.
+      if (!opts.silent) {
+        if (history.state?.lightbox) {
+          history.back();
+        } else if (new URLSearchParams(location.search).has('lightbox')) {
+          // Deep-link arrival (URL had ?lightbox=… but no matching history
+          // entry to pop). Strip the param so the URL reflects reality.
+          const url = new URL(location.href);
+          url.searchParams.delete('lightbox');
+          history.replaceState(history.state, '', url);
+        }
+      }
     }
 
     // ── Nav ────────────────────────────────────────────
