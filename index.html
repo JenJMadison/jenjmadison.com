@@ -300,7 +300,52 @@
     }
 
     /* ── About ────────────────────────────────────────── */
-    #about { max-width: 720px; margin: 0 auto; }
+    #about { max-width: 1040px; margin: 0 auto; }
+    .about-layout { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+    @media (min-width: 820px) {
+      .about-layout { grid-template-columns: minmax(240px, 340px) 1fr; gap: 3.5rem; }
+    }
+    .about-rendering { margin: 0 auto; max-width: 340px; width: 100%; }
+
+    /* ── Renderings (matted, like framed drawings) ────── */
+    .rendering-mat {
+      display: block; width: 100%; padding: 10px; border: none; cursor: zoom-in;
+      background: #efe9df; border-radius: 2px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .rendering-mat:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.6); }
+    .rendering-mat:focus-visible { outline: 2px solid #b8a99a; outline-offset: 4px; }
+    .rendering-mat img { width: 100%; height: 100%; object-fit: contain; }
+    .rendering-caption { margin-top: 0.75rem; text-align: center; line-height: 1.35; }
+    .rendering-caption .show {
+      display: block; font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 0.85rem; color: #e8e4e0;
+    }
+    .rendering-caption .role {
+      display: block; font-size: 0.65rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: #b8a99a; margin-top: 0.15rem;
+    }
+    #renderings { max-width: 1400px; margin: 0 auto; padding-top: 0; padding-bottom: 2rem; }
+    .renderings-label {
+      text-align: center; font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 0.2em; color: #b8a99a; margin-bottom: 2rem;
+    }
+    .renderings-strip {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1.5rem 1.25rem; align-items: start;
+    }
+    .renderings-strip .rendering-mat { aspect-ratio: 3 / 4; }
+    @media (max-width: 600px) {
+      /* Phones: one swipeable row instead of a tall stack */
+      .renderings-strip {
+        display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+        gap: 1rem; padding: 0.5rem 1.25rem 1rem; margin: 0 -1.25rem;
+      }
+      .renderings-strip figure { flex: 0 0 42%; scroll-snap-align: start; }
+    }
+    .lightbox-rendering { max-width: 640px; margin: 0 auto; background: #efe9df; padding: 14px; border-radius: 2px; }
+    .lightbox-rendering img { width: 100%; height: auto; }
     .about-content p {
       font-size: 1.05rem;
       line-height: 1.8;
@@ -481,9 +526,22 @@
       <h2>About</h2>
       <div class="rule"></div>
     </div>
-    <div class="about-content">
+    <div class="about-layout">
+      <figure class="about-rendering" id="aboutRendering"></figure>
+      <div class="about-content">
       <p>Jen J Madison designs costumes for theatre and opera, with a focus on storytelling. Her work spans historical plays both period-faithful and reimagined, new plays in development, and large-scale operas, including Shakespeare in the Park productions with Shakespeare Dallas, Br'er Cotton with Kitchen Dog Theater, and Lucia di Lammermoor at Opera Orlando. She holds an MFA in Costume Design from the University of Texas at Austin. Jen is based in Athens, Georgia, and is always looking for teams to make thoughtful, exciting work with.</p>
     </div>
+    </div>
+  </section>
+
+  <!-- ── Renderings ─────────────────────────────────────
+       Costume renderings, shown matted. Edit the renderings[] array in the
+       script to add/remove/reorder; images live in images/renderings/
+       (NAME.jpg, NAME.webp, NAME-sm.webp). The one with bio:true sits
+       beside the About text instead of in this strip. -->
+  <section id="renderings" aria-label="Costume renderings">
+    <div class="renderings-label">Costume Renderings</div>
+    <div class="renderings-strip" id="renderingsStrip"></div>
   </section>
 
   <!-- ── CV ──────────────────────────────────────────────
@@ -1190,6 +1248,62 @@
           history.replaceState(history.state, '', url);
         }
       }
+    }
+
+    // ── Costume renderings ─────────────────────────────
+    const renderings = [
+      { file: "she-stoops-to-conquer-constance", show: "She Stoops to Conquer", role: "Miss Constance Neville", bio: true },
+      { file: "lucia-look3",            show: "Lucia di Lammermoor",   role: "Lucia, Look 3" },
+      { file: "merry-widow-zeta",       show: "The Merry Widow",       role: "Baron Mirko Zeta, Act 1" },
+      { file: "alcina",                 show: "Alcina",                role: "Alcina, Act I" },
+      { file: "king-lear-fool",         show: "King Lear",             role: "The Fool" },
+      { file: "tempest-ariel",          show: "The Tempest",           role: "Ariel" },
+      { file: "loves-labours-rosaline", show: "Love\u2019s Labour\u2019s Lost", role: "Rosaline" },
+      { file: "death-bad-habit-nuns",   show: "Death is a Bad Habit",  role: "The Nuns" },
+      { file: "xsr-die-gus",            show: "XSR: DIE!",             role: "Pegasus Theatre" },
+      { file: "assassins-booth",        show: "Assassins",             role: "John Wilkes Booth" },
+    ];
+    function renderingFigure(r) {
+      const fig = document.createElement('figure');
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'rendering-mat';
+      btn.setAttribute('aria-label', `Costume rendering: ${r.role}, ${r.show} — enlarge`);
+      const base = `images/renderings/${r.file}`;
+      btn.innerHTML = `<picture>
+          <source type="image/webp" srcset="${base}-sm.webp 600w, ${base}.webp 1600w" sizes="(max-width: 600px) 45vw, 340px">
+          <img src="${base}.jpg" alt="Costume rendering for ${r.role} — ${r.show}, by Jen J Madison" loading="lazy">
+        </picture>`;
+      btn.addEventListener('click', () => { lightboxOpener = btn; openRendering(r); });
+      fig.appendChild(btn);
+      const cap = document.createElement('figcaption');
+      cap.className = 'rendering-caption';
+      cap.innerHTML = `<span class="show">${r.show}</span><span class="role">${r.role}</span>`;
+      fig.appendChild(cap);
+      return fig;
+    }
+    function openRendering(r) {
+      const base = `images/renderings/${r.file}`;
+      lightboxContent.innerHTML = `
+        <h2 id="lightbox-title">${r.show}</h2>
+        <div class="company-tag">${r.role}</div>
+        <div class="credits">Costume rendering</div>
+        <div class="lightbox-rendering"><picture>
+          <source type="image/webp" srcset="${base}.webp">
+          <img src="${base}.jpg" alt="Costume rendering for ${r.role} — ${r.show}, by Jen J Madison">
+        </picture></div>`;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('lightboxClose').focus(), 0);
+    }
+    {
+      const strip = document.getElementById('renderingsStrip');
+      const bioSlot = document.getElementById('aboutRendering');
+      renderings.forEach(r => {
+        const fig = renderingFigure(r);
+        if (r.bio) { bioSlot.replaceWith(fig); fig.classList.add('about-rendering'); }
+        else strip.appendChild(fig);
+      });
     }
 
     // ── Nav ────────────────────────────────────────────
